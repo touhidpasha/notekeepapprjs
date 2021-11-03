@@ -1,35 +1,36 @@
 import React, { useState } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
 
-
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
+import  ForgotPassword  from '../component/ForgotPassword'
+const  UserHelper = require('../contoller/UserHelper')
 
 
 export default function UserLogin(props) {
 
     const [fValue, changeFormValues] = useState({
-
-        // "firstName": "",
-        // "lastName":"",
-        // "emailId":"",
-        // "password":""
+        "email": "",
+        "password": ""
 
     });
+    const [showPassword, changeShowPassword] = useState("password")
+    const [showLogin, changePage] = useState(true);
+
 
     const getFormValues = (event) => {
-        console.log("inside getform");
         changeFormValues({
-            // event.target.name:event.target.lastName;
-
-            "emailId": event.target.emailId,
-            "password": event.target.password
-
+            ...fValue,
+            [event.target.name]: event.target.value
         })
         console.log(fValue);
-
     }
 
+    const loginUser=()=>{
+        UserHelper.loginUser(fValue)
+    }
+
+    if(showLogin===true){
     return (
         <div id="form" >
             <div id="col">
@@ -48,26 +49,39 @@ export default function UserLogin(props) {
                         <span id="OO">O</span>
                         <span id="T">T</span>
                         <span id="E">E</span>
-                        <span id="S">S</span> Create new account</Typography>
+                        <span id="S">S</span> <br></br>login</Typography>
                     <br></br>
 
                 </div>
-                <form onSubmit={getFormValues}>
+                <form >
 
                     <div id="row" >
-                        <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="emailId" name="emailId" value={fValue.emailId}></TextField>
+                        <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={fValue.email} onChange={getFormValues}></TextField>
                     </div>
                     <div id="row">
-                        <TextField className="textField" type="password" sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password}></TextField>
+                        <TextField className="textField" type={showPassword} sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password} onChange={getFormValues}></TextField>
+                    </div>
+                    <div id="row">
+                        <Checkbox sx={{ marginRight: 1 }} onChange={(e) => changeShowPassword(prev => { return (prev === "password" ? "text" : "password") })}></Checkbox>
+                        <Typography sx={{ paddingTop: 1.5 }} id="checkBox">Show password</Typography>
                     </div>
 
                     <div id="row-button">
-                        <Button type="submit" variant="contained" color="primary">Login</Button>
+                        <Button  onClick={loginUser}  variant="contained" color="primary">Login</Button>
+                        <Button  onClick={()=>{changePage(false)}} variant="contained" color="primary">Forgot Password</Button>
+
                     </div>
                 </form>
             </div>
         </div >
     )
+    }
+    else
+    {
+        return(
+            <ForgotPassword></ForgotPassword>
+        )
+    }
 
 
 }
