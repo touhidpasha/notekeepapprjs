@@ -1,18 +1,13 @@
 import React, { useState } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
-// import axios from 'axios'
-// import { BrowserRouter as Router, Switch,Route } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
 import UserLogin from "../component/UserLogin"
 import { NAME_PATTERN1, EMAIL_PATTERN1, PASSWORD_PATTERN1 } from '../utils/regex-patterns'
-
-const  UserHelper = require('../contoller/UserHelper')
-
+const UserHelper = require('../contoller/UserHelper')
 
 export default function UserRegister(props) {
-    
     const [fValue, changeFormValues] = useState({
         "firstName": "",
         "lastName": "",
@@ -20,22 +15,11 @@ export default function UserRegister(props) {
         "password": ""
     });
 
-    // const [validInput, checkValidationFlag] = {
-    //     "firstName": true,
-    //     "lastName": true,
-    //     "email": true,
-    //     "password": true
-    // }
-
-    // const [wrongInput, wrongInputChanger] = useState(false)
-
     const [showRegister, changePage] = useState(true);
     const [showPassword, changeShowPassword] = useState("password")
     const [errorMsg, setErrorMessage] = useState("")
 
     const getFormValues = (event) => {
-        // console.log("inside getform");
-
         setErrorMessage("")
         changeFormValues({
             ...fValue,
@@ -43,7 +27,6 @@ export default function UserRegister(props) {
         })
 
         let flag = true;
-
         switch (event.target.name) {
             case "firstName":
                 flag = NAME_PATTERN1.test([event.target.value]);
@@ -57,32 +40,16 @@ export default function UserRegister(props) {
             case "password":
                 flag = PASSWORD_PATTERN1.test([event.target.value]);
                 break;
-
         }
 
         if (!flag) {
-
             setErrorMessage("please enter valid " + event.target.name)
-            // changeFormValues({
-            //     ...validInput,
-            //     [event.target.name]: false
-            // })
-            // validInput.map((value) => { return (value.value === false ? value.key + " is not valid" : true) })
         }
     }
     const createUser = (event) => {
         console.log("create user called in userRegister");
-        // if (fValue.firstName !== "" || fValue.lastName !== "" || fValue.email !== "" || fValue.password !== "")
-            UserHelper.createUser(fValue)
-        // else
-            // console.log("fill all the fields");
-
+        UserHelper.createUser(fValue)
     }
-
-
-
-
-
 
     if (showRegister)
         return (

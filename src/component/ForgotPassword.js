@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
 
-
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
 import ResetPassword from "./ResetPassword";
 const UserHelper = require('../contoller/UserHelper')
 
-
 export default function ForgotPassword(props) {
-
     const [email, getEmail] = useState("");
-    // const [showPassword, changeShowPassword] = useState("password")
     const [hasEmailSend, getMailStatus] = useState(false)
-
 
     const getEmailHandler = (event) => {
         getEmail(event.target.value)
@@ -48,7 +43,6 @@ export default function ForgotPassword(props) {
 
                     </div>
                     <form >
-
                         <div id="row" >
                             <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={email} onChange={getEmailHandler}></TextField>
                         </div>
@@ -59,11 +53,9 @@ export default function ForgotPassword(props) {
                 </div>
             </div >
         )
-        else
-        return(
+    else
+        return (
             <ResetPassword email={email}></ResetPassword>
 
         )
-
-
 }

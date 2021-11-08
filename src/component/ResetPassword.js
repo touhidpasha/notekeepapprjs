@@ -6,9 +6,7 @@ import logo from "../assets/download.jpeg"
 import ForgotPassword from '../component/ForgotPassword'
 const UserHelper = require('../contoller/UserHelper')
 
-
 export default function ResetPassword(props) {
-
     const [fValue, changeFormValues] = useState({
         "OTP": "",
         "password": "",
@@ -19,10 +17,8 @@ export default function ResetPassword(props) {
     const [rightOTP, changePage] = useState(false);
     const [errorMsg, setErrorMessage] = useState({
         "OTPerrorMsg": "",
-        "PAWDerrorMsg":""
+        "PAWDerrorMsg": ""
     })
-
-
 
     const getFormValues = (event) => {
         changeFormValues({
@@ -33,8 +29,8 @@ export default function ResetPassword(props) {
     }
     const verifyOTP = () => {
         changePage(UserHelper.verifyOTP(fValue.OTP))
-        if(rightOTP!==true)
-         setErrorMessage({...errorMsg,"OTPerrorMsg":" wrong OTP"})
+        if (rightOTP !== true)
+            setErrorMessage({ ...errorMsg, "OTPerrorMsg": " wrong OTP" })
     }
 
     const changePassword = () => {
@@ -73,18 +69,9 @@ export default function ResetPassword(props) {
                         <div id="row" >
                             <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="OTP" name="OTP" value={fValue.OTP} onChange={getFormValues}></TextField>
                         </div>
-                        {/* <div id="row">
-                        <TextField className="textField" type={showPassword} sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password} onChange={getFormValues}></TextField>
-                    </div>
-                    <div id="row">
-                        <Checkbox sx={{ marginRight: 1 }} onChange={(e) => changeShowPassword(prev => { return (prev === "password" ? "text" : "password") })}></Checkbox>
-                        <Typography sx={{ paddingTop: 1.5 }} id="checkBox">Show password</Typography>
-                    </div> */}
-
                         <div id="row-button">
                             <Button onClick={verifyOTP} variant="contained" color="primary">send</Button>
                             {/* <Button  onClick={()=>{changePage(false)}} variant="contained" color="primary">Forgot Password</Button> */}
-
                         </div>
                         <div id="row">
                             <Typography id="error-tag" sx={{ paddingTop: -2, color: "red" }} fontSize="12px" fontWeight="0.5px" className="hint">{errorMsg.OTPerrorMsg}</Typography>
@@ -130,8 +117,6 @@ export default function ResetPassword(props) {
                         </div>
                         <div id="row-button">
                             <Button onClick={changePassword} variant="contained" color="primary">submit</Button>
-                            {/* <Button  onClick={()=>{changePage(false)}} variant="contained" color="primary">Forgot Password</Button> */}
-
                         </div>
                         <div id="row">
                             <Typography id="error-tag" sx={{ paddingTop: -2, color: "red" }} fontSize="12px" fontWeight="0.5px" className="hint">{errorMsg.PAWDerrorMsg}</Typography>
