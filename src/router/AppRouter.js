@@ -1,28 +1,25 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
 
+// import '../css';
+import UserRegister from '../component/UserRegister'
+import UserLogin from '../component/UserLogin'
+import ForgotPassword from "../component/ForgotPassword";
+import ResetPassword from "../component/ResetPassword"
 
-import './App.css';
-import UserRegister from './component/UserRegister'
-import UserLogin from './component/UserLogin'
-import ForgotPassword from "./component/ForgotPassword";
-import ResetPassword from "./component/ResetPassword"
-import AppRouter from "./router/AppRouter"
-
-function App() {
+function AppRouter() {
 
   return (
     <div className="App">
-      <AppRouter></AppRouter>
 
-{/* <Router>
+<Router>
         <Switch>
           <Route path="/" exact component={UserRegister} />
           <Route path="/login" exact component={UserLogin} />
           <Route path="/forgotPassword" exact component={ForgotPassword} />
           <Route path="/resetPassword" exact component={ResetPassword} />
         </Switch>
-      </Router> */}
+      </Router>
       {/* <Router>
         <Switch>
           <Route path="/login" component={UserLogin}></Route>
@@ -45,4 +42,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppRouter;

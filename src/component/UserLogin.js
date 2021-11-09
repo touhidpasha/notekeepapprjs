@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
@@ -27,7 +28,7 @@ export default function UserLogin(props) {
         UserHelper.loginUser(fValue)
     }
 
-    if (showLogin === true) {
+    // if (showLogin === true) {
         return (
             <div id="form" >
                 <div id="col">
@@ -65,19 +66,19 @@ export default function UserLogin(props) {
 
                         <div id="row-button">
                             <Button onClick={loginUser} variant="contained" color="primary">Login</Button>
-                            <Button onClick={() => { changePage(false) }} variant="contained" color="primary">Forgot Password</Button>
+                            <Button  variant="contained" color="primary" component={Link} to="/forgotPassword">Forgot Password</Button>
 
                         </div>
                     </form>
                 </div>
             </div >
         )
-    }
-    else {
-        return (
-            <ForgotPassword></ForgotPassword>
-        )
-    }
+    // }
+    // else {
+    //     return (
+    //         <ForgotPassword></ForgotPassword>
+    //     )
+    // }
 
 
 }
