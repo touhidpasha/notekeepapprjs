@@ -1,19 +1,15 @@
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
 
-
 import './App.css';
-import UserRegister from './component/UserRegister'
-import UserLogin from './component/UserLogin'
-import ForgotPassword from "./component/ForgotPassword";
-import ResetPassword from "./component/ResetPassword"
 import AppRouter from "./router/AppRouter"
+import DashBoard from './component/dashBoard/DashBoard'
 
 function App() {
 
   return (
     <div className="App">
       <AppRouter></AppRouter>
+      {/* <DashBoard></DashBoard> */}
 
 {/* <Router>
         <Switch>
