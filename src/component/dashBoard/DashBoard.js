@@ -1,10 +1,11 @@
 import React from "react";
-import { CardHeader } from '@mui/material';
-
+import Header from './Header'
+import SideBar from "./SideBar";
 export default function DashBoard(props){
     return (
         <>
-        <CardHeader/>
+        <Header/>
+        <SideBar></SideBar>
         </>
     )
 
