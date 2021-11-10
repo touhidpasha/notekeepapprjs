@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-import ResetPassword from "./ResetPassword";
+// import ResetPassword from "../login/ResetPassword";
 const UserHelper = require('../contoller/UserHelper')
 
 export default function ForgotPassword(props) {

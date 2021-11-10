@@ -3,7 +3,7 @@ import { Button, TextField, Checkbox, Typography } from "@mui/material";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-import ForgotPassword from '../component/ForgotPassword'
+// import ForgotPassword from '../component/ForgotPassword'
 const UserHelper = require('../contoller/UserHelper')
 
 export default function ResetPassword(props) {

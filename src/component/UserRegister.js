@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-import UserLogin from "../component/UserLogin"
+// import UserLogin from "../component/UserLogin"
 import { NAME_PATTERN1, EMAIL_PATTERN1, PASSWORD_PATTERN1 } from '../utils/regex-patterns'
 const UserHelper = require('../contoller/UserHelper')
 

@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-import ForgotPassword from '../component/ForgotPassword'
+// import ForgotPassword from '../component/ForgotPassword'
 const UserHelper = require('../contoller/UserHelper')
+
 
 export default function UserLogin(props) {
     const [fValue, changeFormValues] = useState({
