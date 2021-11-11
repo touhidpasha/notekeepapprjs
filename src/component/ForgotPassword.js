@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-// import ResetPassword from "../login/ResetPassword";
+import ResetPassword from "../component/ResetPassword"
 const UserHelper = require('../contoller/UserHelper')
 
 export default function ForgotPassword(props) {
@@ -17,10 +17,10 @@ export default function ForgotPassword(props) {
 
     const sendOTP = () => {
         getMailStatus(UserHelper.sendOTP(email))
-        console.log("mail has sent");
+        // console.log("mail has sent");
     }
 
-    // if (hasEmailSend !== true)
+    if (hasEmailSend !== true)
         return (
             <div id="form" >
                 <div id="col">
@@ -48,15 +48,16 @@ export default function ForgotPassword(props) {
                             <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={email} onChange={getEmailHandler}></TextField>
                         </div>
                         <div id="row-button">
-                            <Button onClick={sendOTP} variant="contained" color="primary" component={Link} to="/resetPassword">GET OTP</Button>
+                            {/* <Button onClick={sendOTP} variant="contained" color="primary" component={Link} to="/resetPassword">GET OTP</Button> */}
+                            <Button onClick={sendOTP} variant="contained" color="primary">GET OTP</Button>
                         </div>
                     </form>
                 </div>
             </div >
         )
-    // else
-    //     return (
-    //         <ResetPassword email={email}></ResetPassword>
+    else
+        return (
+            <ResetPassword email={email}></ResetPassword>
 
-    //     )
+        )
 }

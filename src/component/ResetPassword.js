@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
+import {Link } from "react-router-dom"
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
@@ -28,7 +29,7 @@ export default function ResetPassword(props) {
         console.log(fValue);
     }
     const verifyOTP = () => {
-        changePage(UserHelper.verifyOTP(fValue.OTP))
+        changePage(UserHelper.verifyOTP({ "OTP": fValue.OTP, "email": props.email }))
         if (rightOTP !== true)
             setErrorMessage({ ...errorMsg, "OTPerrorMsg": " wrong OTP" })
     }
@@ -116,7 +117,8 @@ export default function ResetPassword(props) {
                             <Typography sx={{ paddingTop: 1.5 }} id="checkBox">Show password</Typography>
                         </div>
                         <div id="row-button">
-                            <Button onClick={changePassword} variant="contained" color="primary">submit</Button>
+                            {/* <Button onClick={sendOTP} variant="contained" color="primary" component={Link} to="/resetPassword">GET OTP</Button> */}
+                            <Button onClick={changePassword} variant="contained" color="primary" component={Link} to="/login">submit</Button>
                         </div>
                         <div id="row">
                             <Typography id="error-tag" sx={{ paddingTop: -2, color: "red" }} fontSize="12px" fontWeight="0.5px" className="hint">{errorMsg.PAWDerrorMsg}</Typography>

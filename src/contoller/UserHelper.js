@@ -17,7 +17,12 @@ class UserHelper {
         console.log(data.email + " and " + data.password);
         try {
             const res = API.post("user/login", data)
+            localStorage.setItem("token", res)
             console.log(res);
+            console.log("token from localStorage: " + localStorage.getItem("token"));
+            console.log("token from res: " + res);
+
+
         } catch (err) {
             console.log(err);
         }
@@ -26,32 +31,34 @@ class UserHelper {
     sendOTP = (email) => {
         console.log(email);
         try {
-            const res = API.post('user/forgotPassword', { "email": email })
+            const res = API.put('user/forgotPassword', { "email": email })
             console.log(res);
             return true;
         } catch (err) {
             console.log(err)
+            return false;
         }
     }
 
-    verifyOTP = (OTP) => {
+    verifyOTP = (data) => {
         console.log("verify otp called in userhelper");
         try {
-            const res = API.post('user/verifyOTP', { "OTP": OTP })
-            console.log((res.JSON().stringify()));
-            if (JSON().stringify(res) === "correct OTP")
-                return true;
-            else
-                return false;
+            const res = API.post('user/verifyOTP', data)
+            console.log("status code is "+res.status);
+            // if (JSON().stringify(res) === "correct OTP")
+            return true;
+            // else
+            // return false;
         } catch (err) {
-            console.log("wrong OTP");
+            console.log("error occured while verifying OTP");
             return false;
         }
     }
 
     changePassword = (data) => {
         try {
-            const res = API.post("../user/resetPassword", data)
+            const res = API.put("user/resetPassword", data)
+            console.log(res);
             console.log("reset password succesfull");
         } catch (err) {
             console.log(err);
