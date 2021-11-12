@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import './App.css';
 import AppRouter from "./router/AppRouter"
-import DashBoard from './component/dashBoard/DashBoard'
+import DashBoard from './pages/DashBoard'
 
 function App() {
 

@@ -1,10 +1,11 @@
 import React from "react";
-import Header from './Header'
-import SideBar from "./SideBar";
+
+import Header from '../component/dashBoard/Header'
+import SideBar from "../component/dashBoard/SideBar";
 export default function DashBoard(props){
     return (
         <>
-        <Header/>
+        <Header />
         <SideBar></SideBar>
         </>
     )
