@@ -24,8 +24,9 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
-
 import Header from './Header'
+import Note from './Note'
+import Body from './Body'
 
 
 const drawerWidth = 240;
@@ -95,7 +96,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function SideBar() {
+export default function SideBar(props) {
+
+  const dict = { "note 1": "first note", "note 2": "second note" }
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -110,7 +113,7 @@ export default function SideBar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} style={{ background: '#000' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -125,86 +128,83 @@ export default function SideBar() {
             <MenuIcon />
           </IconButton>
           <Header />
-          {/* <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography> */}
+
         </Toolbar>
       </AppBar>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={open} >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-          {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {text === 'Inbox' ? <LightbulbIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
+        <List >
+
           <ListItem button key="Notes">
-              <ListItemIcon>
-               <LightbulbIcon />
-              </ListItemIcon>
-              <ListItemText primary="Notes" />
-            </ListItem>
+            <ListItemIcon>
+              <LightbulbIcon />
+            </ListItemIcon>
+            <ListItemText primary="Notes" />
+          </ListItem>
 
-            <ListItem button key="NotificationsIcon">
-              <ListItemIcon>
-               <NotificationsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Reminders" />
-            </ListItem>
+          <ListItem button key="NotificationsIcon">
+            <ListItemIcon>
+              <NotificationsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reminders" />
+          </ListItem>
 
-            <ListItem button key="ArrowForwardOutlinedIcon">
-              <ListItemIcon>
-               <ArrowForwardOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary="Arch Studio" />
-            </ListItem>
+          <ListItem button key="ArrowForwardOutlinedIcon">
+            <ListItemIcon>
+              <ArrowForwardOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Arch Studio" />
+          </ListItem>
 
-            <ListItem button key="Notes">
-              <ListItemIcon>
-               <CreateOutlinedIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Edit labels" />
-            </ListItem>
+          <ListItem button key="Notes">
+            <ListItemIcon>
+              <CreateOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Edit labels" />
+          </ListItem>
 
-            <ListItem button key="ArchiveOutlinedIcon">
-              <ListItemIcon>
-               <ArchiveOutlinedIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Archieve" />
-            </ListItem>
+          <ListItem button key="ArchiveOutlinedIcon">
+            <ListItemIcon>
+              <ArchiveOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Archieve" />
+          </ListItem>
 
-            <ListItem button key="DeleteOutlinedIcon">
-              <ListItemIcon>
-               <DeleteOutlinedIcon/>
-              </ListItemIcon>
-              <ListItemText primary="Trash" />
-            </ListItem>
+          <ListItem button key="DeleteOutlinedIcon">
+            <ListItemIcon>
+              <DeleteOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Trash" />
+          </ListItem>
         </List>
         <Divider />
-        {/* <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
+
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <h3>all the notes will come here</h3>
-        
-      </Box>
+      <Body notes={props.notes}></Body>
+      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <h4>{JSON.stringify((props.notes))}</h4>
+        {Array.from(props.notes).forEach((note) => {
+          (<Note title={note.title} content={note.content}></Note>)
+        })} */}
+        {/* {{for(var i = 0; i < props.notes.length; i++){
+         ( <Note title={props.notes[i].title} content={props.notes[i].content} ></Note>)
+        }} */}
+        {/* // Array.from(props.notes).map((note) => (
+        //   <Note id={note.title} title={note.title} content={note.content}></Note>))} */}
+        {/* <DrawerHeader /> */}
+        {/* {dict.map(element =>{ */}
+        {/* <Note id="1" title="first note" content="first note content"></Note> */}
+        {/* <Note id="2" title="first note" content="first note content"></Note> */}
+
+        {/* })} */}
+        {/* <h3>all the notes will come here</h3> */}
+
+      {/* </Box> */}
     </Box>
   );
 }

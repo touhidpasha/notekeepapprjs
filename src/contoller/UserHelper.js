@@ -1,8 +1,8 @@
-// const Backend=require('../config//Backend.config')
+// const API=require('../config//Backend.config')
 const axios = require('axios');
 const API = axios.create({
     baseURL: 'http://localhost:5000/',
-    // credentials:'include'
+    credentials: 'include'
 })
 class UserHelper {
     createUser = async (data) => {
@@ -13,51 +13,65 @@ class UserHelper {
         } catch (err) { console.log(err) }
     }
 
-    loginUser = (data) => {
+    loginUser = async (data) => {
         console.log(data.email + " and " + data.password);
         try {
-            const res = API.post("user/login", data)
-            localStorage.setItem("token", res)
+            const res = await API.post("user/login", data)
+            localStorage.setItem("token", res.data.token);
+            console.log("res from BE " + res.status);
             console.log(res);
             console.log("token from localStorage: " + localStorage.getItem("token"));
-            console.log("token from res: " + res);
-
+            // console.log("token from res: " + res);
+            if (res.status === 200)
+                return res.data.token;
+            else
+                return null;
 
         } catch (err) {
             console.log(err);
+            return null;
         }
     }
 
-    sendOTP = (email) => {
+    sendOTP = async (email) => {
         console.log(email);
         try {
-            const res = API.put('user/forgotPassword', { "email": email })
-            console.log(res);
-            return true;
+            const res = await API.put('user/forgotPassword', { "email": email })
+            console.log("in sendOTP" + res.status);
+            if (res.status === 200){
+                console.log("email sent successfully");
+                return true;}
+            else
+                return false;
         } catch (err) {
             console.log(err)
             return false;
         }
     }
 
-    verifyOTP = (data) => {
+    verifyOTP = async (data) => {
         console.log("verify otp called in userhelper");
         try {
-            const res = API.post('user/verifyOTP', data)
-            console.log("status code is "+res.status);
-            // if (JSON().stringify(res) === "correct OTP")
-            return true;
-            // else
-            // return false;
+            // const res = API.post('user/verifyOTP', data).then(response=>{return response})
+            // res=res.json();
+            const res = await API.post('user/verifyOTP', data)
+            console.log(res);
+            console.log("status code is " + res.status);
+            console.log("status code is " + res.data.message);
+
+            if (res.status === 200)
+                return true;
+            else
+                return false;
         } catch (err) {
             console.log("error occured while verifying OTP");
             return false;
         }
     }
 
-    changePassword = (data) => {
+    changePassword = async (data) => {
         try {
-            const res = API.put("user/resetPassword", data)
+            const res = await API.put("user/resetPassword", data)
             console.log(res);
             console.log("reset password succesfull");
         } catch (err) {

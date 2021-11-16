@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-import '../css/UserRegister.css'
+import  '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-import ResetPassword from "../component/ResetPassword"
+import ResetPassword from '../pages/ResetPassword'
 const UserHelper = require('../contoller/UserHelper')
 
 export default function ForgotPassword(props) {
@@ -15,8 +15,9 @@ export default function ForgotPassword(props) {
         getEmail(event.target.value)
     }
 
-    const sendOTP = () => {
-        getMailStatus(UserHelper.sendOTP(email))
+    const sendOTP = async () => {
+         getMailStatus(await UserHelper.sendOTP(email))
+        console.log("email status "+hasEmailSend);
         // console.log("mail has sent");
     }
 

@@ -2,10 +2,11 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
 
 // import '../css';
-import UserRegister from '../component/UserRegister'
-import UserLogin from '../component/UserLogin'
-import ForgotPassword from "../component/ForgotPassword";
-import ResetPassword from "../component/ResetPassword"
+import UserRegister from  '../pages/UserRegister'
+import UserLogin from '../pages/UserLogin'
+import ForgotPassword from "../pages/ForgotPassword";
+import ResetPassword from "../pages/ResetPassword"
+import DashBoard from "../pages/DashBoard"
 
 function AppRouter() {
 
@@ -18,6 +19,8 @@ function AppRouter() {
           <Route path="/login" exact component={UserLogin} />
           <Route path="/forgotPassword" exact component={ForgotPassword} />
           <Route path="/resetPassword" exact component={ResetPassword} />
+          <Route path="/dashBoard" exact component={DashBoard} />
+
         </Switch>
       </Router>
       {/* <Router>

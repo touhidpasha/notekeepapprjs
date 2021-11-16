@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -19,6 +19,12 @@ export default function UserRegister(props) {
     const [showRegister, changePage] = useState(true);
     const [showPassword, changeShowPassword] = useState("password")
     const [errorMsg, setErrorMessage] = useState("")
+    const [token,setTokenValue]=useState(localStorage.getItem("token"))
+
+    useEffect(() => {
+        props.history.push(token=== null?"/":"/dashboard")
+
+    },[token])
 
     const getFormValues = (event) => {
         setErrorMessage("")

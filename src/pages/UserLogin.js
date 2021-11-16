@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
+import DashBoard from "./DashBoard";
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
 // import ForgotPassword from '../component/ForgotPassword'
@@ -15,7 +16,8 @@ export default function UserLogin(props) {
 
     });
     const [showPassword, changeShowPassword] = useState("password")
-    const [showLogin, changePage] = useState(true);
+    const [token, getToken] = useState(localStorage.getItem("token"));
+    // const [returnValue,getValues]=useState()
 
     const getFormValues = (event) => {
         changeFormValues({
@@ -25,11 +27,25 @@ export default function UserLogin(props) {
         console.log(fValue);
     }
 
-    const loginUser = () => {
-        UserHelper.loginUser(fValue)
+    const loginUser = async () => {
+        getToken(await UserHelper.loginUser(fValue))
+        // return <Link component={Link} to={token=== null?"/forgotPassword":"/dashboard"}/>
+
+        // props.history.push(token=== null?"/login":"/dashboard")
+        // console.log("token in userlogin" + token);
+        // getValues(UserHelper.loginUser(fValue));
+        // console.log("retur value from login"+returnValue);
+        // console.log("retur value from login"+returnValue[0]);
+        // console.log("retur value from login"+returnValue[1]);
+
+        // changePage(returnValue[0]);
     }
 
-    // if (showLogin === true) {
+    useEffect(()=>{
+        // getToken(localStorage.getItem("token"))
+        props.history.push(token=== null?"/login":"/dashboard")
+    },[token])
+    // if (token === null) {
         return (
             <div id="form" >
                 <div id="col">
@@ -66,8 +82,10 @@ export default function UserLogin(props) {
                         </div>
 
                         <div id="row-button">
+                            {/* <Button onClick={loginUser} variant="contained" color="primary" component={Link} to={token=== null?"/forgotPassword":"/dashboard"}>Login</Button> */}
                             <Button onClick={loginUser} variant="contained" color="primary">Login</Button>
-                            <Button  variant="contained" color="primary" component={Link} to="/forgotPassword">Forgot Password</Button>
+                            {/* <Button variant="contained" color="primary"  >Forgot Password</Button> */}
+                            <Button variant="contained" color="primary" component={Link} to={"/forgotPassword"} >Forgot Password</Button>
 
                         </div>
                     </form>
@@ -75,9 +93,13 @@ export default function UserLogin(props) {
             </div >
         )
     // }
+    
     // else {
+    // //     <  component={Link} to="/dashboard" />
+
     //     return (
-    //         <ForgotPassword></ForgotPassword>
+    //         // <DashBoard token={token} email={fValue.email} ></DashBoard>
+    //         <DashBoard></DashBoard>
     //     )
     // }
 

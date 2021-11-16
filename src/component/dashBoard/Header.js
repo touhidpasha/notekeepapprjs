@@ -16,9 +16,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
+import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
 
-import logo from "../../assets/download.jpeg"
-
+import logo from "../../assets/logo.jpg"
+import '../../css/Header.css'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -60,7 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Heder() {
+export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -160,18 +165,12 @@ export default function Heder() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: '#000' }}>
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-         <NoteAltOutlinedIcon />
+
+          {/* <NoteAltOutlinedIcon /> */}
+          {/* <LightbulbOutlinedIcon/> */}
+          <img src={logo}></img>
           <Typography
             variant="h6"
             noWrap
@@ -191,20 +190,39 @@ export default function Heder() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {/* <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={2} color="error">
-                <MailIcon />
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <Badge>
+                <RefreshIcon />
               </Badge>
-            </IconButton> */}
-            {/* <IconButton
+            </IconButton>
+            <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
+              <Badge>
+                <ViewAgendaIcon />
               </Badge>
-            </IconButton> */}
+            </IconButton>
+
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge>
+                <SettingsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Badge>
+                <DragIndicatorOutlinedIcon />
+              </Badge>
+            </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -214,7 +232,7 @@ export default function Heder() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle  />
+              <AccountCircle />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
