@@ -5,7 +5,7 @@ import SideBar from "../component/dashBoard/SideBar";
 import NoteHelper from "../contoller/NoteHelper"
 
 export default function DashBoard(props) {
-    const [notes, getNotes] = useState([]);
+    const [notes, setNotes] = useState([]);
     useEffect(async () => {
          console.log("useffect -1 "+localStorage.getItem("token"))
         // console.log("useeffect called" + token);
@@ -13,7 +13,7 @@ export default function DashBoard(props) {
 
         // getNotes(JSON.parse(res.data))
         console.log(res.data);
-        getNotes(res.data)
+        setNotes(res.data)
 
         console.log("notes from backend " + JSON.stringify(res.data));
 

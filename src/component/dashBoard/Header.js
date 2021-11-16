@@ -22,7 +22,7 @@ import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
 
-import logo from "../../assets/logo.jpg"
+import keep from "../../assets/keep.jpg"
 import '../../css/Header.css'
 
 const Search = styled('div')(({ theme }) => ({
@@ -170,7 +170,7 @@ export default function Header() {
 
           {/* <NoteAltOutlinedIcon /> */}
           {/* <LightbulbOutlinedIcon/> */}
-          <img src={logo}></img>
+          <img id="keep-icon" src={keep} alt="loading.."></img>
           <Typography
             variant="h6"
             noWrap
