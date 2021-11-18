@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux"
 
 // import Header from '../component/dashBoard/Header'
 // import SideBar from "../component/dashBo?ard/SideBar";
@@ -8,14 +9,26 @@ import Note from './Note'
 import '../../css/Body.css'
 
 export default function Body(props) {
+     const state = useSelector((state) => state.note);
+    console.log("from redux " + JSON.stringify(state));
+
+    // const state=[];
+    // useEffect(()=>{
+    // state = useSelector((state) => state.note);
+    // console.log("from redux "+ JSON.stringify(state));
+    // },[])
+
     return (
         <div id="body">
             {/* <h4>{JSON.stringify((props.notes))}</h4>
             <h3>{(props.notes)}</h3> */}
-
-            {[... props.notes].map((note) => {
+            {[...state['data']].map((note) => {
                 return (<Note key={note.title} title={note.title} content={note.content}></Note>)
             })}
+
+            {/* {[... props.notes].map((note) => {
+                return (<Note key={note.title} title={note.title} content={note.content}></Note>)
+            })} */}
             {/* {{for(var i = 0; i < props.notes.length; i++){
          ( <Note title={props.notes[i].title} content={props.notes[i].content} ></Note>)
         }} */}
