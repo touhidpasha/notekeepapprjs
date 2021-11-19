@@ -1,10 +1,11 @@
 
 // class actionCreators {
-export const setNotes = (notes) => {
+export const setNotes = (notes,searchString) => {
     return (dispatch) => {
         dispatch({
-            type: "set",
-            payload: notes
+            type: "setNotes",
+            payload: notes,
+            searchString:searchString
         });
     }
 }
@@ -14,10 +15,31 @@ export const getNotes = (notes) => {
     // console.log(amount, "Lol")
     return (dispatch) => {
         dispatch({
-            type: "get",
+            type: "getNotes",
             payload: notes
         });
     }
+
+
 }
+
+export const setFilteredNotes = (notes,searchString) => {
+    return (dispatch) => {
+        dispatch({
+            type: "setFilteredNotes",
+            payload: notes,
+            searchString:searchString
+        })
+    }
+}
+export const setSearchString = (string)=>{
+    return (dispatch) => {
+        dispatch({
+            type: "setSearchString",
+            payload: string
+        })
+    }
+}
+
 // }
 // module.exports = new actionCreators();

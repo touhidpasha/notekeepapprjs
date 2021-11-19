@@ -140,42 +140,42 @@ export default function SideBar(props) {
         <Divider />
         <List >
 
-          <ListItem button key="Notes">
+          <ListItem button key="Notes" value="Notes" >
             <ListItemIcon>
               <LightbulbIcon />
             </ListItemIcon>
             <ListItemText primary="Notes" />
           </ListItem>
 
-          <ListItem button key="NotificationsIcon">
+          <ListItem button key="NotificationsIcon" value="Reminders">
             <ListItemIcon>
               <NotificationsIcon />
             </ListItemIcon>
             <ListItemText primary="Reminders" />
           </ListItem>
 
-          <ListItem button key="ArrowForwardOutlinedIcon">
+          <ListItem button key="ArrowForwardOutlinedIcon" value="Arch Studio">
             <ListItemIcon>
               <ArrowForwardOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Arch Studio" />
           </ListItem>
 
-          <ListItem button key="Notes">
+          <ListItem button key="Notes" value="Edit labels">
             <ListItemIcon>
               <CreateOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Edit labels" />
           </ListItem>
 
-          <ListItem button key="ArchiveOutlinedIcon">
+          <ListItem button key="ArchiveOutlinedIcon" value="Archive" >
             <ListItemIcon>
               <ArchiveOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Archieve" />
           </ListItem>
 
-          <ListItem button key="DeleteOutlinedIcon">
+          <ListItem button key="DeleteOutlinedIcon" value="Trash">
             <ListItemIcon>
               <DeleteOutlinedIcon />
             </ListItemIcon>

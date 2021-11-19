@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,9 +21,16 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from 'redux'
+import { useSelector } from "react-redux"
+
+
 
 import keep from "../../assets/keep.jpg"
 import '../../css/Header.css'
+import * as actionCreators from "../../state/action-creators/servent"  //servent or methods
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -66,8 +73,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+
+  const dispatch = useDispatch();
+  const { setNotes, setFilteredNotes,setSearchString } = bindActionCreators(actionCreators, dispatch);
+  const state = useSelector((state) => state.note);
+  // const [headerName,getHeaderName] =useState("Fundoo")
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [searchText, getSearchText] = useState("");
+  useEffect(() => {
+    setNotes([...state['data']], searchText)
+
+    // setFilteredNotes([...state['data']], searchText)
+    // setSearchString(searchText)
+    console.log("header useeffect called");
+  }, [searchText])
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -186,7 +208,9 @@ export default function Header() {
             <StyledInputBase
               placeholder="Search note"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(event) => getSearchText(event.target.value)}
             />
+            {console.log(searchText)}
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>

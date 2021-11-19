@@ -23,7 +23,7 @@ export default function DashBoard(props) {
         // getNotes(JSON.parse(res.data))
         console.log(res.data);
         saveNotes(res.data)
-        setNotes(res.data)
+        setNotes(res.data,"")
         console.log("notes from backend " + JSON.stringify(res.data));
 
         // console.log("useeffect called" + token);
