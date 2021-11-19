@@ -26,13 +26,13 @@ export default function Body(props) {
     // },[])
 
     return (
-        <div id="body">
+        <div class="body">
             {/* <Grid xs={12}> */}
             {/* <h4>{JSON.stringify((props.notes))}</h4>
             <h3>{(props.notes)}</h3> */}
             {
                 [...noteState['data']].map((note) => {
-                    return (<Note key={note.title} title={note.title} content={note.content}></Note>)
+                    return (<Note class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
                 })
             }
             {/* {(searchString == "") ?
