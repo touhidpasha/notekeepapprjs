@@ -6,6 +6,10 @@ const API = axios.create({
 class NoteHelper {
 
 
+    saveNotes = async (info) => {
+        const res = await API.post("note", info);
+        console.log(res);
+    }
     // getUserDetails= async (data) => {
     //     const res=await API.get('user/getUserDetails',data)
     //     console.log(res);
