@@ -15,6 +15,12 @@ class NoteHelper {
     //     console.log(res);
     // }
 
+
+    moveToTrash=async (info)=>{
+        const res=await API.put("note/trash",info);
+        console.log(res);
+    }
+
     getAllNotes = async (info) => {
         console.log("get all notes called in notehelper " + info.token);
 

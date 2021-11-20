@@ -10,6 +10,16 @@ export const setNotes = (notes,searchString) => {
     }
 }
 
+export const setTrashNotes = (notes,searchString) => {
+    return (dispatch) => {
+        dispatch({
+            type: "setTrashNotes",
+            payload: notes,
+            searchString:searchString
+        });
+    }
+}
+
 
 export const getNotes = (notes) => {
     // console.log(amount, "Lol")

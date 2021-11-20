@@ -3,5 +3,22 @@ Card{
     color: aqua;
 }
 .card{
-    background-color:rgb(226, 161, 161);
+    background-color:white;
+}
+   
+
+.icons{
+    display: none;
+    /* height:60px; */
+    
+}
+
+.card:hover .icons{
+
+    display:flex;
+    /* flex-flow: wrap; */
+    justify-content: space-evenly;
+   
+
+
 }

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React, {useState, useEffect} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -23,6 +23,8 @@ import ArrowForwardOutlinedIcon from '@mui/icons-material/ArrowForwardOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import { useSelector } from "react-redux"
+
 
 import Header from './Header'
 import Note from './Note'
@@ -99,6 +101,14 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function SideBar(props) {
 
+  const [showTrash,setShowTrash]=useState(false)
+  useEffect(() => {
+    console.log(" trash flag "+showTrash);
+  },[showTrash])
+
+  const noteState = useSelector((state) => state.note);
+  const trashNoteState = useSelector((state) => state.trashNote);
+
   const dict = { "note 1": "first note", "note 2": "second note" }
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -141,7 +151,7 @@ export default function SideBar(props) {
         <Divider />
         <List >
 
-          <ListItem button key="Notes" value="Notes" >
+          <ListItem button key="Notes" value="Notes" onClick={()=>{setShowTrash(false)}} >
             <ListItemIcon>
               <LightbulbIcon />
             </ListItemIcon>
@@ -176,7 +186,7 @@ export default function SideBar(props) {
             <ListItemText primary="Archieve" />
           </ListItem>
 
-          <ListItem button key="DeleteOutlinedIcon" value="Trash">
+          <ListItem button key="DeleteOutlinedIcon" value="Trash" onClick={()=>{setShowTrash(true)}}>
             <ListItemIcon>
               <DeleteOutlinedIcon />
             </ListItemIcon>
@@ -187,7 +197,7 @@ export default function SideBar(props) {
 
       </Drawer>
       <div class="main">
-        <Body notes={props.notes}></Body>
+        <Body showTrash={showTrash} notes={(showTrash)?trashNoteState['data']:noteState['data']}></Body>
       </div>
       {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <h4>{JSON.stringify((props.notes))}</h4>

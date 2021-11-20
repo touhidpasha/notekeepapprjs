@@ -75,8 +75,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
 
   const dispatch = useDispatch();
-  const { setNotes, setFilteredNotes,setSearchString } = bindActionCreators(actionCreators, dispatch);
+  const { setNotes, setTrashNotes,setFilteredNotes,setSearchString } = bindActionCreators(actionCreators, dispatch);
   const state = useSelector((state) => state.note);
+  const trashState = useSelector((state) => state.trashNote);
+
   // const [headerName,getHeaderName] =useState("Fundoo")
 
 
@@ -85,6 +87,7 @@ export default function Header() {
   const [searchText, getSearchText] = useState("");
   useEffect(() => {
     setNotes([...state['data']], searchText)
+    setTrashNotes([...trashState['data']], searchText)
 
     // setFilteredNotes([...state['data']], searchText)
     // setSearchString(searchText)

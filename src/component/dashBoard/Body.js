@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux"
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Card from '@mui/material/Card';
@@ -16,7 +16,7 @@ import NoteHelper from "../../contoller/NoteHelper";
 // import { Typography } from "@mui/material";
 
 export default function Body(props) {
-    const noteState = useSelector((state) => state.note);
+    // const noteState = useSelector((state) => state.note);
     const [title, getTitle] = useState()
     const [content, getContent] = useState()
     const saveNote = () => {
@@ -32,7 +32,7 @@ export default function Body(props) {
     // const filteredNoteState = useSelector((state) => state.filtedNotes);
     // const searchString = useSelector((state) => state.searchString);
 
-    console.log("from redux " + JSON.stringify(noteState));
+    // console.log("from redux " + JSON.stringify(noteState));
     // console.log("fileterd notes from redux " + JSON.stringify(filteredNoteState));
 
 
@@ -46,31 +46,34 @@ export default function Body(props) {
         <>
             {/* <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '550px' }}> */}
             <Card>
-                <div class="add-note">
+                {
+                    ((!props.showTrash)? (<div class="add-note">
                     {/* <Card> */}
                     <TextField placeholder="title" variant="filled" sx={{ width: "500px" }} value={title} onChange={(event) => { getTitle(event.target.value) }}></TextField>
                     <TextField placeholder="content" variant="filled" multiline rows={2} sx={{ width: "500px" }} value={content} onChange={(event) => { getContent(event.target.value) }}
-                    // InputProps={{
-                    //     endAdornment: (
-
-                    // ),
-                    // }}
                     ></TextField>
                     <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>close</Button>
 
                     {/* </Card> */}
 
-                </div>
+                </div>):(console.log("trash is displaying")))
+                }
+                
             </Card>
             <div class="body">
-                {/* <Grid xs={12}> */}
-                {/* <h4>{JSON.stringify((props.notes))}</h4>
-            <h3>{(props.notes)}</h3> */}
                 {
-                    [...noteState['data']].map((note) => {
-                        return (<Note class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
+                    [...props.notes].map((note) => {
+                        return (<Note id={note._id} class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
                     })
                 }
+
+
+                {/* {
+                    [...noteState['data']].map((note) => {
+                        return (<Note id={note._id} class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
+                    })
+                } */}
+
                 {/* {(searchString == "") ?
                 ( [...noteState['data']].map((note) => {
                 return (<Note key={note.title} title={note.title} content={note.content}></Note>)

@@ -7,10 +7,10 @@ const notesReducers = (state = initialState, action) => {
         case "setNotes":
             var searchString = action.searchString
             if (searchString == "")
-            return { ...state, "data": action.payload }
+            return { ...state, "data": [...action.payload].filter(note=>{ return (!note.trash)}) }
         else {
             console.log("search is happening");
-            return { ...state, "data": [...action.payload].filter(note => { return (note.title.includes(searchString) || note.content.includes(searchString)) }) }
+            return { ...state, "data": [...action.payload].filter(note => { return ((note.title.includes(searchString) || note.content.includes(searchString)) && !note.trash) }) }
 
         }
         case "getNotes":
@@ -27,6 +27,22 @@ const notesReducers = (state = initialState, action) => {
     }
 }
 
+const trashNotesReducers = (state = initialState, action) => {
+    switch (action.type) {
+        case "setTrashNotes":
+            var searchString = action.searchString
+            if (searchString == "")
+            return { ...state, "data": [...action.payload].filter(note=>{ return (note.trash)}) }
+        else {
+            console.log("search is happening");
+            return { ...state, "data": [...action.payload].filter(note => { return ((note.title.includes(searchString) || note.content.includes(searchString)) && note.trash) }) }
+
+        }
+        
+        default:
+            return state
+    }
+}
 
 // const filteredNotesReducers = (state = initialState, action) => {
 //     switch (action.type) {
@@ -53,6 +69,7 @@ const notesReducers = (state = initialState, action) => {
 // export default reducer;
 const reducers = combineReducers({
     note: notesReducers,
+    trashNote:trashNotesReducers
     // filteredNotes: filteredNotesReducers,
     // searchString:searchStringReducers,
     // headerName:headerReducer

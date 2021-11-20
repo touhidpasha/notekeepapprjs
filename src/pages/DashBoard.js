@@ -12,7 +12,7 @@ import  * as actionCreators  from "../state/action-creators/servent"  //servent 
 export default function DashBoard(props) {
 
     const dispatch=useDispatch();
-    const {setNotes,getNotes}=bindActionCreators(actionCreators,dispatch);
+    const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
 
     const [notes, saveNotes] = useState([]);
     useEffect(async () => {
@@ -24,6 +24,7 @@ export default function DashBoard(props) {
         console.log(res.data);
         saveNotes(res.data)
         setNotes(res.data,"")
+        setTrashNotes(res.data,"")
         console.log("notes from backend " + JSON.stringify(res.data));
 
         // console.log("useeffect called" + token);
