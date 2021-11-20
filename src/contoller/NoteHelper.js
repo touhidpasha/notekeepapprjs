@@ -16,9 +16,15 @@ class NoteHelper {
     // }
 
 
-    moveToTrash=async (info)=>{
-        const res=await API.put("note/trash",info);
+    moveToTrash = async (info) => {
+        const res = await API.put("note/trash", info);
         console.log(res);
+    }
+
+    deleteNote = async (info) => {
+        const res = await API.put("note", info);
+        console.log(res);
+
     }
 
     getAllNotes = async (info) => {

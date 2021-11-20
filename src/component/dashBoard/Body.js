@@ -63,7 +63,7 @@ export default function Body(props) {
             <div class="body">
                 {
                     [...props.notes].map((note) => {
-                        return (<Note id={note._id} class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
+                        return (<Note showTrash={props.showTrash} id={note._id} class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
                     })
                 }
 

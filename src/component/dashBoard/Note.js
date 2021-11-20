@@ -20,9 +20,12 @@ export default function Note(props) {
         NoteHelper.moveToTrash({"id":id,"token":localStorage.getItem("token")})
         console.log(id+" is deleted");
         window.location.reload(false)
+    }
 
+    const deleteNote=(id) => {
+        NoteHelper.deleteNote({"id":id,"token":localStorage.getItem("token")})
+        window.location.reload(false)
 
-        
     }
     return (
         <>
@@ -38,7 +41,7 @@ export default function Note(props) {
                         <PersonAddIcon></PersonAddIcon>
                         <ColorLensIcon></ColorLensIcon>
                         <ImageIcon></ImageIcon>
-                        <DeleteIcon onClick={()=>moveToTrash(props.id)}></DeleteIcon>
+                        <DeleteIcon onClick={()=>(props.showTrash)?deleteNote(props.id):moveToTrash(props.id)}></DeleteIcon>
                         <ArchiveIcon></ArchiveIcon>
                         <MoreVertIcon></MoreVertIcon>
                     </div>
