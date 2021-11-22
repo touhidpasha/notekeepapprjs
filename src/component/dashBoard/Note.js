@@ -15,7 +15,7 @@ import TextField from '@mui/material/TextField';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 import '../../css/Note.css';
-import NoteHelper from "../../contoller/NoteHelper"
+// import NoteHelper from "../../contoller/NoteHelper"
 
 export default function Note(props) {
     const moveToTrash=(id) => {

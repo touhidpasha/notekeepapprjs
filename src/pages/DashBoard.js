@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { bindActionCreators } from 'redux'
+// import { useDispatch } from "react-redux";
+// import { bindActionCreators } from 'redux'
 
 
 import Header from '../component/dashBoard/Header'
 import SideBar from "../component/dashBoard/SideBar";
 import NoteHelper from "../contoller/NoteHelper"
-import  * as actionCreators  from "../state/action-creators/servent"  //servent or methods
+// import  * as actionCreators  from "../state/action-creators/servent"  //servent or methods
 
 
 export default function DashBoard(props) {
 
-    const dispatch=useDispatch();
-    const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
+    // const dispatch=useDispatch();
+    // const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
 
     const [notes, saveNotes] = useState([]);
     useEffect(async () => {
          console.log("useffect -1 "+localStorage.getItem("token"))
         // console.log("useeffect called" + token);
-        const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
+        // const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
 
         // getNotes(JSON.parse(res.data))
         console.log(res.data);
         saveNotes(res.data)
-        setNotes(res.data,"")
-        setTrashNotes(res.data,"")
+        // setNotes(res.data,"")
+        // setTrashNotes(res.data,"")
         console.log("notes from backend " + JSON.stringify(res.data));
 
         // console.log("useeffect called" + token);
