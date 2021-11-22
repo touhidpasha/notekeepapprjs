@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useState, useEffect} from "react";
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -11,6 +11,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import AddAlertIcon from '@mui/icons-material/AddAlert';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import ArchiveIcon from '@mui/icons-material/Archive';
+import TextField from '@mui/material/TextField';
+import CreditScoreIcon from '@mui/icons-material/CreditScore';
 
 import '../../css/Note.css';
 import NoteHelper from "../../contoller/NoteHelper"
@@ -27,22 +29,34 @@ export default function Note(props) {
         window.location.reload(false)
 
     }
+
+    const [title,setTitle]=useState(props.title)
+    const [content,setContent]=useState(props.content)
+
+    const updateNote=(id) => {
+        NoteHelper.updateNote({"id":id,"token":localStorage.getItem("token"),"title":title,"content":content})
+        window.location.reload(false)
+
+
+    }
+
     return (
         <>
 
-            <Card  sx={{ display: 'grid', padding: '5px', margin: '10px', width: '550px' }} >
+            <Card  sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} >
                 {/* <Card className="card"> */}
                 
                 <CardContent class="card" >
-                    <Typography variant="h4">{props.title}</Typography>
-                    <Typography variant="h6">{props.content}</Typography>
+                    <TextField variant="filled" value={title} onChange={(event)=>{setTitle(event.target.value)}} inputProps={{min: 0, style: { textAlign: 'center',fontWeight: 'bold'}}}></TextField>
+                    <TextField variant="filled"  value={content} onChange={(event)=>{setContent(event.target.value)}} inputProps={{min: 0, style: { textAlign: 'center' }}}></TextField>
                     <div class="icons">
                         <AddAlertIcon></AddAlertIcon>
-                        <PersonAddIcon></PersonAddIcon>
+                        {/* <PersonAddIcon></PersonAddIcon> */}
                         <ColorLensIcon></ColorLensIcon>
                         <ImageIcon></ImageIcon>
                         <DeleteIcon onClick={()=>(props.showTrash)?deleteNote(props.id):moveToTrash(props.id)}></DeleteIcon>
                         <ArchiveIcon></ArchiveIcon>
+                        <CreditScoreIcon onClick={()=>updateNote(props.id)}></CreditScoreIcon>
                         <MoreVertIcon></MoreVertIcon>
                     </div>
                 </CardContent>

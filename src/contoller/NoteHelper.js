@@ -27,6 +27,11 @@ class NoteHelper {
 
     }
 
+    updateNote = async (info)=>{
+        const res = await API.put("note/update", info);
+        console.log(res);
+    }
+
     getAllNotes = async (info) => {
         console.log("get all notes called in notehelper " + info.token);
 
