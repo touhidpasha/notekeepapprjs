@@ -1,20 +1,21 @@
-const axios = require('axios');
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import  * as actionCreators  from "../state/action-creators/servent"  //servent or methods
 
 
-
+const axios = require('axios');
 const API = axios.create({
     baseURL: 'http://localhost:5000/',
     // credentials: 'include'
 })
+// const dispatch=useDispatch();
+// const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
 
-const dispatch=useDispatch();
-const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
+export default class NoteHelper {
+     static dispatch=useDispatch();
+    static {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
 
-class NoteHelper {
-    
+
 
 
     saveNotes = async (info) => {
@@ -82,4 +83,4 @@ class NoteHelper {
     }
 
 }
-module.exports = new NoteHelper();
+// module.exports = new NoteHelper();

@@ -18,7 +18,7 @@ export default function DashBoard(props) {
     useEffect(async () => {
          console.log("useffect -1 "+localStorage.getItem("token"))
         // console.log("useeffect called" + token);
-        // const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
+        const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
 
         // getNotes(JSON.parse(res.data))
         console.log(res.data);
