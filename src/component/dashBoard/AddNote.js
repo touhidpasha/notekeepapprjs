@@ -8,11 +8,19 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card'
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from 'redux'
+
 
 import NoteHelper from "../../contoller/NoteHelper";
+import  * as actionCreators  from "../../../src/state/action-creators/servent"  //servent or methods
+
 
 
 export default function AddNote(props) {
+
+    const dispatch=useDispatch();
+    const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
 
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
@@ -25,7 +33,7 @@ export default function AddNote(props) {
 
     const [title, getTitle] = useState()
     const [content, getContent] = useState()
-    // const [flag, changeFlag] = useState()
+    const [flag, changeFlag] = useState()
 
     const saveNote = () => {
         console.log("title " + title + " and content " + content);
@@ -34,15 +42,20 @@ export default function AddNote(props) {
             return false;
         }
         NoteHelper.saveNotes({ "title": title, "content": content, "token": localStorage.getItem("token") })
-        window.location.reload(false)
-        // changeFlag(!flag)
+        // window.location.reload(false)
+        getTitle("")
+        getContent("")
+        changeFlag(!flag)
         return true;
     }
 
-    // useEffect(async () => {
-        // const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
+    useEffect(async () => {
+        const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
+        setNotes(res.data,"")
+        setTrashNotes(res.data,"")
 
-    // },[flag])
+
+    },[flag])
     return (
         <div>
             <Typography onClick={handleClickOpen} > Take a note...</Typography>
@@ -69,8 +82,8 @@ export default function AddNote(props) {
                     </Card>
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>close</Button>
-                    <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>submit</Button>
+                    <Button variant="text" style={{ fontColor: 'black' }} onClick={()=>{saveNote(); handleClose()}}>close</Button>
+                    <Button variant="text" style={{ fontColor: 'black' }} onClick={()=>{saveNote(); handleClose()}}>submit</Button>
 
                 </DialogActions>
             </Dialog>

@@ -31,7 +31,7 @@ import { useSelector } from "react-redux"
 import keep from "../../assets/keep.jpg"
 import '../../css/Header.css'
 import * as actionCreators from "../../state/action-creators/servent"  //servent or methods
-
+import NoteHelper from "../../contoller/NoteHelper"
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -76,7 +76,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function Header() {
 
   const dispatch = useDispatch();
-  const { setNotes, setTrashNotes,setFilteredNotes,setSearchString } = bindActionCreators(actionCreators, dispatch);
+  const { setNotes, setTrashNotes, setFilteredNotes, setSearchString } = bindActionCreators(actionCreators, dispatch);
   const state = useSelector((state) => state.note);
   const trashState = useSelector((state) => state.trashNote);
 
@@ -86,9 +86,14 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [searchText, getSearchText] = useState("");
-  useEffect(() => {
-    setNotes([...state['data']], searchText)
-    setTrashNotes([...trashState['data']], searchText)
+  useEffect(async () => {
+
+    const res = await NoteHelper.getAllNotes({ "token": (localStorage.getItem("token")) })
+    setNotes(res.data, searchText)
+    setTrashNotes(res.data, searchText)
+
+    // setNotes([...state['data']], searchText)
+    // setTrashNotes([...trashState['data']], searchText)
 
     // setFilteredNotes([...state['data']], searchText)
     // setSearchString(searchText)
@@ -205,11 +210,12 @@ export default function Header() {
           >
             Fundoo Notes
           </Typography>
-          <Search>
-            <SearchIconWrapper>
+          <Search >
+            <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+              sx={{ width: "800px" }}
               placeholder="Search note"
               inputProps={{ 'aria-label': 'search' }}
               onChange={(event) => getSearchText(event.target.value)}
