@@ -25,7 +25,7 @@ export default function AddNote(props) {
 
     const [title, getTitle] = useState()
     const [content, getContent] = useState()
-    const [flag, changeFlag] = useState()
+    // const [flag, changeFlag] = useState()
 
     const saveNote = () => {
         console.log("title " + title + " and content " + content);
@@ -34,15 +34,15 @@ export default function AddNote(props) {
             return false;
         }
         NoteHelper.saveNotes({ "title": title, "content": content, "token": localStorage.getItem("token") })
-        // window.location.reload(false)
-        changeFlag(!flag)
+        window.location.reload(false)
+        // changeFlag(!flag)
         return true;
     }
 
-    useEffect(async () => {
-        const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
+    // useEffect(async () => {
+        // const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
 
-    },[flag])
+    // },[flag])
     return (
         <div>
             <Typography onClick={handleClickOpen} > Take a note...</Typography>
