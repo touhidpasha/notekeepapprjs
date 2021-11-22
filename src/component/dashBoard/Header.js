@@ -21,6 +21,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import ViewAgendaIcon from '@mui/icons-material/ViewAgenda';
 import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
 import DragIndicatorOutlinedIcon from '@mui/icons-material/DragIndicatorOutlined';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import { useSelector } from "react-redux"

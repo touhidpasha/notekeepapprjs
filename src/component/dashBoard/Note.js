@@ -43,7 +43,7 @@ export default function Note(props) {
     return (
         <>
 
-            <Card  sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} >
+            <Card  sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} key={props.id}>
                 {/* <Card className="card"> */}
                 
                 <CardContent class="card" >

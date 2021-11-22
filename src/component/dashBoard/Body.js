@@ -13,21 +13,21 @@ import Button from '@mui/material/Button';
 import Note from './Note'
 import '../../css/Body.css'
 import NoteHelper from "../../contoller/NoteHelper";
-// import { Typography } from "@mui/material";
+import AddNote from "../../component/dashBoard/AddNote"
 
 export default function Body(props) {
     // const noteState = useSelector((state) => state.note);
-    const [title, getTitle] = useState()
-    const [content, getContent] = useState()
-    const saveNote = () => {
-        console.log("title " + title + " and content " + content);
-        if (title == undefined || content == undefined) {
-            console.log("empty title and content");
-            return false;
-        }
-        NoteHelper.saveNotes({ "title": title, "content": content, "token": localStorage.getItem("token") })
-        window.location.reload(false)
-    }
+    // const [title, getTitle] = useState()
+    // const [content, getContent] = useState()
+    // const saveNote = () => {
+    //     console.log("title " + title + " and content " + content);
+    //     if (title == undefined || content == undefined) {
+    //         console.log("empty title and content");
+    //         return false;
+    //     }
+    //     NoteHelper.saveNotes({ "title": title, "content": content, "token": localStorage.getItem("token") })
+    //     window.location.reload(false)
+    // }
 
     // const filteredNoteState = useSelector((state) => state.filtedNotes);
     // const searchString = useSelector((state) => state.searchString);
@@ -45,25 +45,28 @@ export default function Body(props) {
     return (
         <>
             {/* <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '550px' }}> */}
-            <Card>
+            {/* <Card>
                 {
-                    ((!props.showTrash)? (<div class="add-note">
-                    {/* <Card> */}
-                    <TextField placeholder="title" variant="filled" sx={{ width: "500px" }} value={title} onChange={(event) => { getTitle(event.target.value) }}></TextField>
-                    <TextField placeholder="content" variant="filled" multiline rows={2} sx={{ width: "500px" }} value={content} onChange={(event) => { getContent(event.target.value) }}
-                    ></TextField>
-                    <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>close</Button>
-
-                    {/* </Card> */}
-
-                </div>):(console.log("trash is displaying")))
+                    ((!props.showTrash) ? (<div class="add-note">
+                        <TextField placeholder="title" variant="filled" sx={{ width: "500px" }} value={title} onChange={(event) => { getTitle(event.target.value) }}></TextField>
+                        <TextField placeholder="content" variant="filled" multiline rows={2} sx={{ width: "500px" }} value={content} onChange={(event) => { getContent(event.target.value) }}
+                        ></TextField>
+                        <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>close</Button>
+                    </div>) : (console.log("trash is displaying")))
                 }
-                
+
+            </Card> */}
+            <Card>
+                <div class="popUpBar">
+
+                    <AddNote></AddNote>
+                </div>
             </Card>
+
             <div class="body">
                 {
                     [...props.notes].map((note) => {
-                        return (<Note showTrash={props.showTrash} id={note._id} class="note-item" key={note.title} title={note.title} content={note.content}></Note>)
+                        return (<Note showTrash={props.showTrash} id={note._id} class="note-item" key={note._id} title={note.title} content={note.content}></Note>)
                     })
                 }
 

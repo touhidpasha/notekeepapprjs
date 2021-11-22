@@ -22,6 +22,11 @@
   -ms-grid-column-align: center; */
   /* align: center;  */
 }
+.popUpBar{
+  height: 50px;
+  padding-top: 20px;
+  /* width:300px; */
+}
 
 /* for tablet */
 @media screen and (max-width: 1600px){
@@ -42,7 +47,7 @@
 }
 
 /* for mobile */
-@media screen and (max-width: 400px){
+@media screen and (max-width: 1200px){
   .body{
     /* --auto-grid-min-size: 16rem; */
   display: grid;
