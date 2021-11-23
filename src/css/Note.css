@@ -26,3 +26,7 @@ Card{
 .parent-icons{
     height:30px;
 }
+#edit-note{
+    display:flex;
+    flex-flow: column
+}

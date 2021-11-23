@@ -48,12 +48,14 @@ export default function Note(props) {
         const res = await NoteHelper.getAllNotes({ "token": (localStorage.getItem("token")) })
         setNotes(res.data, "")
         setTrashNotes(res.data, "")
+        setUpdate(false)
 
 
     }, [flag])
 
     const [title, setTitle] = useState(props.title)
     const [content, setContent] = useState(props.content)
+    const [update, setUpdate] = useState(false)
 
     const updateNote = (id) => {
         NoteHelper.updateNote({ "id": id, "token": localStorage.getItem("token"), "title": title, "content": content })
@@ -68,8 +70,19 @@ export default function Note(props) {
                 {/* <Card className="card"> */}
 
                 <CardContent class="card" >
-                    <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
-                    <TextField variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
+                    <div class="note" onClick={() => { setUpdate(true) }}>
+                        {update ?
+                            <div id="edit-note">
+                                <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
+                                <TextField variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
+                            </div> :
+                            <div>
+                                <h3 variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}>{title}</h3>
+                                <p variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}>{content}</p>
+                            </div>
+                        }
+                    </div>
+
                     <div class="parent-icons">
                         <div class="icons">
                             <AddAlertIcon></AddAlertIcon>
