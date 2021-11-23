@@ -16,6 +16,7 @@ export default function DashBoard(props) {
 
     const [notes, saveNotes] = useState([]);
     useEffect(async () => {
+        props.history.push(localStorage.getItem("token")=== null?"/login":"/dashboard")
          console.log("useffect -1 "+localStorage.getItem("token"))
         // console.log("useeffect called" + token);
         const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })

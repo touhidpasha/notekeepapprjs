@@ -25,7 +25,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import { useSelector } from "react-redux"
-
+import { useHistory } from "react-router-dom";
 
 
 import keep from "../../assets/keep.jpg"
@@ -73,7 +73,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Header() {
+export default function Header(props) {
 
   const dispatch = useDispatch();
   const { setNotes, setTrashNotes, setFilteredNotes, setSearchString } = bindActionCreators(actionCreators, dispatch);
@@ -86,6 +86,7 @@ export default function Header() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [searchText, getSearchText] = useState("");
+  // const [login,setLogin]=useState();
   useEffect(async () => {
 
     const res = await NoteHelper.getAllNotes({ "token": (localStorage.getItem("token")) })
@@ -99,6 +100,11 @@ export default function Header() {
     // setSearchString(searchText)
     console.log("header useeffect called");
   }, [searchText])
+
+  // useEffect(()=>{
+  //   props.history.push(localStorage.getItem("token")=== null?"/login":"/dashboard")
+
+  // })
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -119,7 +125,13 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  let history = useHistory();
+  const logOutHandler = () => {
+    
+    localStorage.removeItem("token");
+    (history.push(localStorage.getItem("token") === null ? "/login" : "/dashboard"));
 
+  }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -139,6 +151,11 @@ export default function Header() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={() => {
+        logOutHandler();
+        handleMenuClose()
+      }}>LogOut</MenuItem>
+
     </Menu>
   );
 

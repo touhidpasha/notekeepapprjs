@@ -7,6 +7,7 @@ import UserLogin from '../pages/UserLogin'
 import ForgotPassword from "../pages/ForgotPassword";
 import ResetPassword from "../pages/ResetPassword"
 import DashBoard from "../pages/DashBoard"
+import Header from "../component/dashBoard/Header"
 
 function AppRouter() {
 
@@ -20,6 +21,7 @@ function AppRouter() {
           <Route path="/forgotPassword" exact component={ForgotPassword} />
           <Route path="/resetPassword" exact component={ResetPassword} />
           <Route path="/dashBoard" exact component={DashBoard} />
+          <Route path="/header" exact component={Header} />
 
         </Switch>
       </Router>

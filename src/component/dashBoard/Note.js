@@ -70,15 +70,17 @@ export default function Note(props) {
                 <CardContent class="card" >
                     <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
                     <TextField variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
-                    <div class="icons">
-                        <AddAlertIcon></AddAlertIcon>
-                        {/* <PersonAddIcon></PersonAddIcon> */}
-                        <ColorLensIcon></ColorLensIcon>
-                        <ImageIcon></ImageIcon>
-                        <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
-                        <ArchiveIcon></ArchiveIcon>
-                        <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
-                        <MoreVertIcon></MoreVertIcon>
+                    <div class="parent-icons">
+                        <div class="icons">
+                            <AddAlertIcon></AddAlertIcon>
+                            {/* <PersonAddIcon></PersonAddIcon> */}
+                            <ColorLensIcon></ColorLensIcon>
+                            <ImageIcon></ImageIcon>
+                            <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
+                            <ArchiveIcon></ArchiveIcon>
+                            <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
+                            <MoreVertIcon></MoreVertIcon>
+                        </div>
                     </div>
                 </CardContent>
 

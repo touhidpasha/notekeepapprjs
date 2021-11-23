@@ -11,6 +11,7 @@ Card{
 
 .icons{
     display: none;
+    /* content-visibility: 40px; */
     /* height:60px; */
     
 }
@@ -21,6 +22,7 @@ Card{
     /* flex-flow: wrap; */
     justify-content: space-evenly;
    
-
-
+}
+.parent-icons{
+    height:30px;
 }
