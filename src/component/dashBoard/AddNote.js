@@ -73,7 +73,7 @@ export default function AddNote(props) {
                         {
                             ((!props.showTrash) ? (<div class="add-note">
                                 <TextField placeholder="title" variant="filled" sx={{ width: "500px" }} value={title} onChange={(event) => { getTitle(event.target.value) }}></TextField>
-                                <TextField placeholder="content" variant="filled" multiline rows={2} sx={{ width: "500px" }} value={content} onChange={(event) => { getContent(event.target.value) }}
+                                <TextField multiline placeholder="content" variant="filled" multiline rows={2} sx={{ width: "500px" }} value={content} onChange={(event) => { getContent(event.target.value) }}
                                 ></TextField>
                                 {/* <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>close</Button> */}
                             </div>) : (console.log("trash is displaying")))

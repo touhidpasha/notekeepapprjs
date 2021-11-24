@@ -74,25 +74,31 @@ export default function Note(props) {
                         {update ?
                             <div id="edit-note">
                                 <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
-                                <TextField variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
+                                <TextField multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
                             </div> :
                             <div>
                                 <h3 variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}>{title}</h3>
-                                <p variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}>{content}</p>
+                                <Typography multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}><pre>{content}</pre></Typography>
                             </div>
                         }
                     </div>
 
                     <div class="parent-icons">
                         <div class="icons">
-                            <AddAlertIcon></AddAlertIcon>
-                            {/* <PersonAddIcon></PersonAddIcon> */}
-                            <ColorLensIcon></ColorLensIcon>
-                            <ImageIcon></ImageIcon>
-                            <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
-                            <ArchiveIcon></ArchiveIcon>
-                            <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
-                            <MoreVertIcon></MoreVertIcon>
+                            {
+                                (props.showTrash) ? <DeleteIcon onClick={() => (props.showTrash)? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
+                                    : <>
+                                        <AddAlertIcon></AddAlertIcon>
+                                        {/* <PersonAddIcon></PersonAddIcon> */}
+                                        <ColorLensIcon></ColorLensIcon>
+                                        <ImageIcon></ImageIcon>
+                                        <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
+                                        <ArchiveIcon></ArchiveIcon>
+                                        <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
+                                        <MoreVertIcon></MoreVertIcon>
+                                    </>
+                            }
+
                         </div>
                     </div>
                 </CardContent>
