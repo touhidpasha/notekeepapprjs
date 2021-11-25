@@ -52,8 +52,6 @@ class UserHelper {
     verifyOTP = async (data) => {
         console.log("verify otp called in userhelper");
         try {
-            // const res = API.post('user/verifyOTP', data).then(response=>{return response})
-            // res=res.json();
             const res = await API.post('user/verifyOTP', data)
             console.log(res);
             console.log("status code is " + res.status);

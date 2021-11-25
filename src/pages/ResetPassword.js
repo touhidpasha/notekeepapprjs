@@ -4,7 +4,6 @@ import {Link } from "react-router-dom"
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-// import ForgotPassword from '../component/ForgotPassword'
 const UserHelper = require('../contoller/UserHelper')
 
 export default function ResetPassword(props) {
@@ -46,7 +45,6 @@ export default function ResetPassword(props) {
         return (
             <div id="form" >
                 <div id="col">
-                    {/* <img src={{require("../assets/download.jpeg")}} alt="wait still loading.."></img> */}
                     <img src={logo} alt="wait still loading.."></img>
                 </div>
                 <div id="col">
@@ -72,7 +70,6 @@ export default function ResetPassword(props) {
                         </div>
                         <div id="row-button">
                             <Button onClick={verifyOTP} variant="contained" color="primary">send</Button>
-                            {/* <Button  onClick={()=>{changePage(false)}} variant="contained" color="primary">Forgot Password</Button> */}
                         </div>
                         <div id="row">
                             <Typography id="error-tag" sx={{ paddingTop: -2, color: "red" }} fontSize="12px" fontWeight="0.5px" className="hint">{errorMsg.OTPerrorMsg}</Typography>
@@ -86,7 +83,6 @@ export default function ResetPassword(props) {
         return (
             <div id="form" >
                 <div id="col">
-                    {/* <img src={{require("../assets/download.jpeg")}} alt="wait still loading.."></img> */}
                     <img src={logo} alt="wait still loading.."></img>
                 </div>
                 <div id="col">
@@ -117,7 +113,6 @@ export default function ResetPassword(props) {
                             <Typography sx={{ paddingTop: 1.5 }} id="checkBox">Show password</Typography>
                         </div>
                         <div id="row-button">
-                            {/* <Button onClick={sendOTP} variant="contained" color="primary" component={Link} to="/resetPassword">GET OTP</Button> */}
                             <Button onClick={changePassword} variant="contained" color="primary" component={Link} to="/login">submit</Button>
                         </div>
                         <div id="row">

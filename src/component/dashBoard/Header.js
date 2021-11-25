@@ -27,7 +27,6 @@ import { bindActionCreators } from 'redux'
 import { useSelector } from "react-redux"
 import { useHistory } from "react-router-dom";
 
-
 import keep from "../../assets/keep.jpg"
 import '../../css/Header.css'
 import * as actionCreators from "../../state/action-creators/servent"  //servent or methods
@@ -79,33 +78,15 @@ export default function Header(props) {
   const { setNotes, setTrashNotes, setFilteredNotes, setSearchString } = bindActionCreators(actionCreators, dispatch);
   const state = useSelector((state) => state.note);
   const trashState = useSelector((state) => state.trashNote);
-
-  // const [headerName,getHeaderName] =useState("Fundoo")
-
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [searchText, getSearchText] = useState("");
-  // const [login,setLogin]=useState();
   useEffect(async () => {
-
     const res = await NoteHelper.getAllNotes({ "token": (localStorage.getItem("token")) })
     setNotes(res.data, searchText)
     setTrashNotes(res.data, searchText)
-
-    // setNotes([...state['data']], searchText)
-    // setTrashNotes([...trashState['data']], searchText)
-
-    // setFilteredNotes([...state['data']], searchText)
-    // setSearchString(searchText)
     console.log("header useeffect called");
   }, [searchText])
-
-  // useEffect(()=>{
-  //   props.history.push(localStorage.getItem("token")=== null?"/login":"/dashboard")
-
-  // })
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -127,7 +108,7 @@ export default function Header(props) {
   };
   let history = useHistory();
   const logOutHandler = () => {
-    
+
     localStorage.removeItem("token");
     (history.push(localStorage.getItem("token") === null ? "/login" : "/dashboard"));
 
@@ -215,9 +196,6 @@ export default function Header(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{ background: '#000' }}>
         <Toolbar>
-
-          {/* <NoteAltOutlinedIcon /> */}
-          {/* <LightbulbOutlinedIcon/> */}
           <img id="keep-icon" src={keep} alt="loading.."></img>
           <Typography
             variant="h6"

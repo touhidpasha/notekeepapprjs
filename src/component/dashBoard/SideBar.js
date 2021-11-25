@@ -25,15 +25,12 @@ import ArchiveOutlinedIcon from '@mui/icons-material/ArchiveOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { useSelector } from "react-redux"
 
-
 import Header from './Header'
 import Note from './Note'
 import Body from './Body'
 import '../../css/SideBar.css'
 
-
 const drawerWidth = 240;
-
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create('width', {
@@ -199,25 +196,6 @@ export default function SideBar(props) {
       <div class="main">
         <Body showTrash={showTrash} notes={(showTrash)?trashNoteState['data']:noteState['data']}></Body>
       </div>
-      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <h4>{JSON.stringify((props.notes))}</h4>
-        {Array.from(props.notes).forEach((note) => {
-          (<Note title={note.title} content={note.content}></Note>)
-        })} */}
-      {/* {{for(var i = 0; i < props.notes.length; i++){
-         ( <Note title={props.notes[i].title} content={props.notes[i].content} ></Note>)
-        }} */}
-      {/* // Array.from(props.notes).map((note) => (
-        //   <Note id={note.title} title={note.title} content={note.content}></Note>))} */}
-      {/* <DrawerHeader /> */}
-      {/* {dict.map(element =>{ */}
-      {/* <Note id="1" title="first note" content="first note content"></Note> */}
-      {/* <Note id="2" title="first note" content="first note content"></Note> */}
-
-      {/* })} */}
-      {/* <h3>all the notes will come here</h3> */}
-
-      {/* </Box> */}
     </Box>
   );
 }

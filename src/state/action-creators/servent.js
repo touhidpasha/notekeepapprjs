@@ -50,6 +50,3 @@ export const setSearchString = (string)=>{
         })
     }
 }
-
-// }
-// module.exports = new actionCreators();

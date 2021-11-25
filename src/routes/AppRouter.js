@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
 
-// import '../css';
 import UserRegister from  '../pages/UserRegister'
 import UserLogin from '../pages/UserLogin'
 import ForgotPassword from "../pages/ForgotPassword";
@@ -10,7 +9,6 @@ import DashBoard from "../pages/DashBoard"
 import Header from "../component/dashBoard/Header"
 
 function AppRouter() {
-
   return (
     <div className="App">
 
@@ -25,24 +23,6 @@ function AppRouter() {
 
         </Switch>
       </Router>
-      {/* <Router>
-        <Switch>
-          <Route path="/login" component={UserLogin}></Route>
-          <Route path="/register" component={UserRegister}></Route>
-
-        </Switch>
-        <Link to="/login" className="btn btn-primary">Login</Link>
-      </Router> */}
-
-      {/* <UserRegister></UserRegister> */}
-
-      {/* <UserRegister></UserRegister> */}
-      {/* <Router>
-        
-        <Route path="/" component={UserRegister}/>
-          {/* <Route path="/login" component={UserLogin} /> */}
-      {/* <UserRegister></UserRegister> */}
-      {/* </Router> ?*/}
     </div>
   );
 }

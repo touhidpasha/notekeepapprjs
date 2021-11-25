@@ -1,10 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, TextField, Checkbox, Typography } from "@mui/material";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import '../css/UserRegister.css'
 import logo from "../assets/download.jpeg"
-// import UserLogin from "../component/UserLogin"
 import { NAME_PATTERN1, EMAIL_PATTERN1, PASSWORD_PATTERN1 } from '../utils/regex-patterns'
 const UserHelper = require('../contoller/UserHelper')
 
@@ -19,12 +18,12 @@ export default function UserRegister(props) {
     const [showRegister, changePage] = useState(true);
     const [showPassword, changeShowPassword] = useState("password")
     const [errorMsg, setErrorMessage] = useState("")
-    const [token,setTokenValue]=useState(localStorage.getItem("token"))
+    const [token, setTokenValue] = useState(localStorage.getItem("token"))
 
     useEffect(() => {
-        props.history.push(token=== null?"/":"/dashboard")
+        props.history.push(token === null ? "/" : "/dashboard")
 
-    },[token])
+    }, [token])
 
     const getFormValues = (event) => {
         setErrorMessage("")
@@ -58,11 +57,9 @@ export default function UserRegister(props) {
         UserHelper.createUser(fValue)
     }
 
-    // if (showRegister)
     return (
         <div id="form" >
             <div id="col">
-                {/* <img src={{require("../assets/download.jpeg")}} alt="wait still loading.."></img> */}
                 <img src={logo} alt="wait still loading.."></img>
             </div>
             <div id="col">
@@ -81,41 +78,35 @@ export default function UserRegister(props) {
                     <br></br>
                 </div>
                 <form  >
-                <div id="row">
-                <TextField className="textField" sx={{ paddingRight: 2 }} placeholder="First name" label="First name" name="firstName" value={fValue.firstName} onChange={getFormValues}></TextField>
+                    <div id="row">
+                        <TextField className="textField" sx={{ paddingRight: 2 }} placeholder="First name" label="First name" name="firstName" value={fValue.firstName} onChange={getFormValues}></TextField>
 
-                <TextField className="textField" placeholder="Last name" label="Last name" name="lastName" value={fValue.lastName} onChange={getFormValues}></TextField>
-                </div>
-                <div id="row" >
-                <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={fValue.email} onChange={getFormValues}></TextField>
-                </div>
-                <div id="row">
-                <TextField className="textField" type ={showPassword} sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password} onChange={getFormValues}></TextField>
-                <TextField className="textField" type ={showPassword} placeholder="Confirm" label="confirm"></TextField>
-                </div>
-                <div id="row">
-                <Typography sx={{ paddingTop: -2 }} fontSize="12px" fontWeight="0.5px" className="hint">password must contain atleat 8 chars with combination of all chars</Typography>
-                </div>
-                <div id="row">
-                <Checkbox sx={{ marginRight: 1 }} onChange={(e) => changeShowPassword(prev => { return (prev === "password"?"text": "password") })}></Checkbox>
-                <Typography sx={{ paddingTop: 1.5 }} id="checkBox">Show password</Typography>
-                </div>
-                <div id="row">
-                <Typography id="error-tag" sx={{ paddingTop: -2, color: "red" }} fontSize="12px" fontWeight="0.5px" className="hint">{errorMsg}</Typography>
-                </div>
-                <div id="row-button">
-                <Button  variant="contained" color="primary" component={Link} to="/login" >Login       
-                </Button>
-                <Button onClick={createUser} variant="contained" color="primary"  >Create Account</Button>
-                </div>
+                        <TextField className="textField" placeholder="Last name" label="Last name" name="lastName" value={fValue.lastName} onChange={getFormValues}></TextField>
+                    </div>
+                    <div id="row" >
+                        <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={fValue.email} onChange={getFormValues}></TextField>
+                    </div>
+                    <div id="row">
+                        <TextField className="textField" type={showPassword} sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password} onChange={getFormValues}></TextField>
+                        <TextField className="textField" type={showPassword} placeholder="Confirm" label="confirm"></TextField>
+                    </div>
+                    <div id="row">
+                        <Typography sx={{ paddingTop: -2 }} fontSize="12px" fontWeight="0.5px" className="hint">password must contain atleat 8 chars with combination of all chars</Typography>
+                    </div>
+                    <div id="row">
+                        <Checkbox sx={{ marginRight: 1 }} onChange={(e) => changeShowPassword(prev => { return (prev === "password" ? "text" : "password") })}></Checkbox>
+                        <Typography sx={{ paddingTop: 1.5 }} id="checkBox">Show password</Typography>
+                    </div>
+                    <div id="row">
+                        <Typography id="error-tag" sx={{ paddingTop: -2, color: "red" }} fontSize="12px" fontWeight="0.5px" className="hint">{errorMsg}</Typography>
+                    </div>
+                    <div id="row-button">
+                        <Button variant="contained" color="primary" component={Link} to="/login" >Login
+                        </Button>
+                        <Button onClick={createUser} variant="contained" color="primary"  >Create Account</Button>
+                    </div>
                 </form>
-                </div>
-            </div >
-            )
-    // else
-    //     return (
-    //         <UserLogin></UserLogin>
-    //     )
-
-
+            </div>
+        </div >
+    )
 }

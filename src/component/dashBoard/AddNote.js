@@ -11,18 +11,16 @@ import Card from '@mui/material/Card'
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 
-
 import NoteHelper from "../../contoller/NoteHelper";
 import  * as actionCreators  from "../../../src/state/action-creators/servent"  //servent or methods
 
-
-
 export default function AddNote(props) {
-
     const dispatch=useDispatch();
     const {setNotes, setTrashNotes,getTrashNotes}=bindActionCreators(actionCreators,dispatch);
-
     const [open, setOpen] = React.useState(false);
+    const [title, getTitle] = useState()
+    const [content, getContent] = useState()
+    const [flag, changeFlag] = useState()
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -30,31 +28,22 @@ export default function AddNote(props) {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const [title, getTitle] = useState()
-    const [content, getContent] = useState()
-    const [flag, changeFlag] = useState()
-
-    const saveNote = () => {
+  const saveNote = () => {
         console.log("title " + title + " and content " + content);
         if (title == undefined || content == undefined) {
             console.log("empty title and content");
             return false;
         }
         NoteHelper.saveNotes({ "title": title, "content": content, "token": localStorage.getItem("token") })
-        // window.location.reload(false)
         getTitle("")
         getContent("")
         changeFlag(!flag)
         return true;
     }
-
     useEffect(async () => {
         const res = await NoteHelper.getAllNotes({ "token":(localStorage.getItem("token")) })
         setNotes(res.data,"")
         setTrashNotes(res.data,"")
-
-
     },[flag])
     return (
         <div>
@@ -66,7 +55,6 @@ export default function AddNote(props) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {/* {"Use Google's location service?"} */}
                 </DialogTitle>
                 <DialogContent>
                     <Card>
@@ -75,7 +63,6 @@ export default function AddNote(props) {
                                 <TextField placeholder="title" variant="filled" sx={{ width: "500px" }} value={title} onChange={(event) => { getTitle(event.target.value) }}></TextField>
                                 <TextField multiline placeholder="content" variant="filled" multiline rows={2} sx={{ width: "500px" }} value={content} onChange={(event) => { getContent(event.target.value) }}
                                 ></TextField>
-                                {/* <Button variant="text" style={{ fontColor: 'black' }} onClick={saveNote}>close</Button> */}
                             </div>) : (console.log("trash is displaying")))
                         }
 
