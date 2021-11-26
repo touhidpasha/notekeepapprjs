@@ -23,6 +23,12 @@ class NoteHelper {
         const res = await API.put("note/update", info);
         console.log(res);
     }
+    updateColor = async (info)=>{
+        console.log("notehelper called for color update");
+        const res = await API.post("note/updateColor", info);
+        console.log(res);
+        // return res;
+    }
 
     getAllNotes = async (info) => {
         console.log("get all notes called in notehelper " + info.token);

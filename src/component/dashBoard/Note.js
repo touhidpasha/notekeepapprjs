@@ -12,6 +12,8 @@ import TextField from '@mui/material/TextField';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
+import { HexColorPicker } from "react-colorful";
+import { Circle, Wheel, Github } from '@uiw/react-color'
 
 import '../../css/Note.css';
 import NoteHelper from "../../contoller/NoteHelper"
@@ -21,6 +23,26 @@ export default function Note(props) {
     const dispatch = useDispatch();
     const { setNotes, setTrashNotes, getTrashNotes } = bindActionCreators(actionCreators, dispatch);
     const [flag, changeFlag] = useState()
+    const [title, setTitle] = useState(props.title)
+    const [content, setContent] = useState(props.content)
+    const [update, setUpdate] = useState(false)
+    const [color, setColor] = useState(props.color);
+    const [showColorPicker, setColorPicker] = useState(false)
+
+
+
+    const setColorHandler = (color) => {
+        setColor(color)
+    }
+    useEffect(async () => {
+        updateColor(props.id)
+        changeFlag(!flag)
+    }, [color])
+    const updateColor = (id) => {
+        console.log("color is" + color);
+        NoteHelper.updateColor({ "id": id, "token": localStorage.getItem("token"), "color": color })
+        changeFlag(!flag)
+    }
     const moveToTrash = (id) => {
         NoteHelper.moveToTrash({ "id": id, "token": localStorage.getItem("token") })
         console.log(id + " is deleted");
@@ -36,11 +58,11 @@ export default function Note(props) {
         setNotes(res.data, "")
         setTrashNotes(res.data, "")
         setUpdate(false)
+        console.log("notes after color"+JSON.stringify(res.data));
+        // setColorPicker(!showColorPicker)
     }, [flag])
 
-    const [title, setTitle] = useState(props.title)
-    const [content, setContent] = useState(props.content)
-    const [update, setUpdate] = useState(false)
+
 
     const updateNote = (id) => {
         NoteHelper.updateNote({ "id": id, "token": localStorage.getItem("token"), "title": title, "content": content })
@@ -50,7 +72,8 @@ export default function Note(props) {
     return (
         <>
             <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} key={props.id}>
-                <CardContent class="card" >
+                <CardContent class="card" sx={{ backgroundColor: color }}>
+
                     <div class="note" onClick={() => { setUpdate(true) }}>
                         {update ?
                             <div id="edit-note">
@@ -67,10 +90,16 @@ export default function Note(props) {
                     <div class="parent-icons">
                         <div class="icons">
                             {
-                                (props.showTrash) ? <DeleteIcon onClick={() => (props.showTrash)? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
+                                (props.showTrash) ? <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
                                     : <>
                                         <AddAlertIcon></AddAlertIcon>
-                                        <ColorLensIcon></ColorLensIcon>
+                                        <div onClick={() => { setColorPicker(!showColorPicker) }}>
+                                            {(!showColorPicker) ? <ColorLensIcon >
+                                            </ColorLensIcon> : <Github color={color} onChange={async (color) => { setColorHandler(color.hex); }} />}
+
+
+                                        </div>
+
                                         <ImageIcon></ImageIcon>
                                         <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
                                         <ArchiveIcon></ArchiveIcon>

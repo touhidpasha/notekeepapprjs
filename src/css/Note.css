@@ -2,11 +2,11 @@ Card{
     padding: 0.5em;
     color: aqua;
 }
-.card{
+/* .card{
     background-color:white;
     display: flex;
     flex-direction: column;
-}
+} */
    
 
 .icons{
