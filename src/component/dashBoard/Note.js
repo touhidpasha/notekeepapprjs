@@ -16,11 +16,13 @@ import { bindActionCreators } from 'redux'
 import '../../css/Note.css';
 import NoteHelper from "../../contoller/NoteHelper"
 import * as actionCreators from "../../../src/state/action-creators/servent"  //servent or methods
+import ImageUpload from "./ImageUpload";
 
 export default function Note(props) {
     const dispatch = useDispatch();
     const { setNotes, setTrashNotes, getTrashNotes } = bindActionCreators(actionCreators, dispatch);
     const [flag, changeFlag] = useState()
+    const [imagePopUp,setImagePopUp] = useState(false)
     const moveToTrash = (id) => {
         NoteHelper.moveToTrash({ "id": id, "token": localStorage.getItem("token") })
         console.log(id + " is deleted");
@@ -36,7 +38,11 @@ export default function Note(props) {
         setNotes(res.data, "")
         setTrashNotes(res.data, "")
         setUpdate(false)
+        // setImagePopUp(false)
     }, [flag])
+    // useEffect(async () => {
+    //     setImagePopUp(false)
+    // },[()=>{setTimeout(()=>{},4000)}])
 
     const [title, setTitle] = useState(props.title)
     const [content, setContent] = useState(props.content)
@@ -45,8 +51,12 @@ export default function Note(props) {
     const updateNote = (id) => {
         NoteHelper.updateNote({ "id": id, "token": localStorage.getItem("token"), "title": title, "content": content })
         changeFlag(!flag)
+        setImagePopUp(false)
     }
+    const imagePopUphandler=()=>{
 
+    }
+if(!imagePopUp)
     return (
         <>
             <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} key={props.id}>
@@ -71,7 +81,7 @@ export default function Note(props) {
                                     : <>
                                         <AddAlertIcon></AddAlertIcon>
                                         <ColorLensIcon></ColorLensIcon>
-                                        <ImageIcon></ImageIcon>
+                                        <ImageIcon onClick={()=>setImagePopUp(true)}></ImageIcon>
                                         <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
                                         <ArchiveIcon></ArchiveIcon>
                                         <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
@@ -84,4 +94,6 @@ export default function Note(props) {
             </Card>
         </>
     )
+    else
+    return <ImageUpload></ImageUpload>
 }
