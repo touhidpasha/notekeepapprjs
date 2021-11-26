@@ -54,10 +54,10 @@ export default function UserLogin(props) {
                 <form >
 
                     <div id="row" >
-                        <TextField className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={fValue.email} onChange={getFormValues}></TextField>
+                        <TextField id="userName" className="textField" sx={{ width: 480 }} placeholder="Username" label="email" name="email" value={fValue.email} onChange={getFormValues}></TextField>
                     </div>
                     <div id="row">
-                        <TextField className="textField" type={showPassword} sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password} onChange={getFormValues}></TextField>
+                        <TextField id="password" className="textField" type={showPassword} sx={{ paddingRight: 2 }} placeholder="Password" label="password" name="password" value={fValue.password} onChange={getFormValues}></TextField>
                     </div>
                     <div id="row">
                         <Checkbox sx={{ marginRight: 1 }} onChange={(e) => changeShowPassword(prev => { return (prev === "password" ? "text" : "password") })}></Checkbox>
@@ -65,7 +65,7 @@ export default function UserLogin(props) {
                     </div>
 
                     <div id="row-button">
-                        <Button onClick={loginUser} variant="contained" color="primary">Login</Button>
+                        <Button id="login-button" onClick={loginUser} variant="contained" color="primary">Login</Button>
                         <Button variant="contained" color="primary" component={Link} to={"/forgotPassword"} >Forgot Password</Button>
 
                     </div>
