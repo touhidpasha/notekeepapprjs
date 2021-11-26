@@ -41,5 +41,12 @@ class NoteHelper {
         console.log("res in note helper" + res);
         return res;
     }
+    uploadImage=async (data)=>{
+        console.log("in uploadImage note helper");
+        const res = await API.post("note/uploadImage",data, { headers: {'Content-Type': 'multipart/form-data'}})
+        console.log(res);
+        return res;
+
+    }
 }
 module.exports = new NoteHelper();
