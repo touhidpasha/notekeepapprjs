@@ -12,7 +12,6 @@ import TextField from '@mui/material/TextField';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
-import { HexColorPicker } from "react-colorful";
 import { Circle, Wheel, Github } from '@uiw/react-color'
 
 import '../../css/Note.css';
@@ -85,9 +84,9 @@ export default function Note(props) {
         return (
             <>
                 <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} key={props.id}>
-                    <CardContent class="card" sx={{ backgroundColor: color }}>
+                    <CardContent class="card">
 
-                        <div class="note" onClick={() => { setUpdate(true) }}>
+                        <div class="note" style={{'background-color':color}} onClick={() => { setUpdate(true) }}>
                             {update ?
                                 <div id="edit-note">
                                     <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
@@ -114,8 +113,8 @@ export default function Note(props) {
 
                                             </div>
 
-                                            <ImageIcon></ImageIcon>
-                                            <ColorLensIcon></ColorLensIcon>
+                                            {/* <ImageIcon></ImageIcon> */}
+                                            {/* <ColorLensIcon></ColorLensIcon> */}
                                             <ImageIcon onClick={() => setImagePopUp(true)}></ImageIcon>
                                             <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
                                             <ArchiveIcon></ArchiveIcon>
