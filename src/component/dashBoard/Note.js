@@ -83,18 +83,18 @@ export default function Note(props) {
     if (!imagePopUp)
         return (
             <>
-                <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px' }} key={props.id}>
+                <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px',minHeight:'100px' }} key={props.id}>
                     <CardContent class="card">
 
-                        <div class="note" style={{'background-color':color}} onClick={() => { setUpdate(true) }}>
+                        <div class="note" style={{ 'background-color': color, 'border-radius': '5px' }} onClick={() => { setUpdate(true) }}>
                             {update ?
                                 <div id="edit-note">
                                     <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
-                                    <TextField multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
+                                    <TextField  multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
                                 </div> :
                                 <div>
                                     <h3 variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}>{title}</h3>
-                                    <Typography multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}><pre>{content}</pre></Typography>
+                                    <Typography multiline style={{wordWrap:'break-word'}} variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}><pre>{content}</pre></Typography>
                                 </div>
                             }
                         </div>
@@ -104,7 +104,7 @@ export default function Note(props) {
                                 {
                                     (props.showTrash) ? <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
                                         : <>
-                                            <AddAlertIcon></AddAlertIcon>
+                                            {/* <AddAlertIcon></AddAlertIcon> */}
 
                                             <div onClick={() => { setColorPicker(!showColorPicker) }}>
                                                 {(!showColorPicker) ? <ColorLensIcon >
@@ -112,14 +112,11 @@ export default function Note(props) {
 
 
                                             </div>
-
-                                            {/* <ImageIcon></ImageIcon> */}
-                                            {/* <ColorLensIcon></ColorLensIcon> */}
                                             <ImageIcon onClick={() => setImagePopUp(true)}></ImageIcon>
                                             <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
-                                            <ArchiveIcon></ArchiveIcon>
+                                            {/* <ArchiveIcon></ArchiveIcon> */}
                                             <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
-                                            <MoreVertIcon></MoreVertIcon>
+                                            {/* <MoreVertIcon></MoreVertIcon> */}
                                         </>
                                 }
                             </div>

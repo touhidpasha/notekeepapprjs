@@ -27,9 +27,12 @@ Card{
     background-color:rgb(248, 245, 245);
 }
 .parent-icons{
-    height:30px;
+    height:20px;
 }
 #edit-note{
     display:flex;
     flex-flow: column
+}
+.content{
+    font-size:40px;
 }

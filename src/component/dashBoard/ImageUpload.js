@@ -28,23 +28,9 @@ export default function ImageUpload(props) {
     const handleClose = () => {
         setOpen(false);
     };
-    // const saveNote = () => {
-    //     console.log("title " + title + " and content " + content);
-    //     if (title == undefined || content == undefined) {
-    //         console.log("empty title and content");
-    //         return false;
-    //     }
-    //     NoteHelper.saveNotes({ "title": title, "content": content, "token": localStorage.getItem("token") })
-    //     getTitle("")
-    //     getContent("")
-    //     changeFlag(!flag)
-    //     return true;
-    // }
+   
     useEffect(async () => {
         setOpen(true)
-        // const res = await NoteHelper.getAllNotes({ "token": (localStorage.getItem("token")) })
-        // setNotes(res.data, "")
-        // setTrashNotes(res.data, "")
     }, [])
 
     useEffect(async () => {
