@@ -14,7 +14,7 @@ async function test(){
 
     
     var title=await driver.getTitle();
-    console.log("title is "+title+" and count is "+count++);
+    console.log("title is "+title+" and request count is "+count++);
     await driver.quit();
     }
     
