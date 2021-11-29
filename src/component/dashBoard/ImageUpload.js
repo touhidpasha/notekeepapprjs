@@ -42,15 +42,20 @@ export default function ImageUpload(props) {
 
     //image uploading 
     const [fileData, getFile] = useState();
+    const [fileName,getFileName]=useState();
     const getImage = (event) => {
         getFile(event.target.files[0])
+        getFileName(event.target.files[0].name)
 
     }
     const upload = () => {
         var data = new FormData();
-        console.log("from state " + JSON.stringify(fileData));
-        console.log("from formdata " + JSON.stringify(data));
+        console.log("from state fileData " + JSON.stringify(fileData));
+        console.log("from formdata data " + JSON.stringify(data));
         data.append("image", fileData)
+        data.append("token",localStorage.getItem("token"))
+        data.append("fileName",fileName)
+        data.append("id",props.id)
         const res = NoteHelper.uploadImage(data)
 
 
