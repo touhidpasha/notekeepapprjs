@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
 import { Circle, Wheel, Github } from '@uiw/react-color'
 import Image from "material-ui-image";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import '../../css/Note.css';
 import NoteHelper from "../../contoller/NoteHelper"
@@ -84,22 +85,30 @@ export default function Note(props) {
         changeFlag(!flag)
         setImagePopUp(false)
     }
+  
+    const handleClickAway = (id) => {
+        console.log("click away called"); 
+        updateNote(id)
+    };
 
     // if (!imagePopUp)
     return (
         <>
-            <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px', minHeight: '100px' }} key={props.id}>
+            <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px', minHeight: '100px' }} key={props.id} loading='lazy'>
                 <CardContent class="card">
                     {/* {image ===!null ? null : <div> */}
-                        {/* <Image src={image} /> */}
+                    {/* <Image src={image} /> */}
                     {/* </div>} */}
 
                     <div class="note" style={{ 'background-color': color, 'border-radius': '5px' }} onClick={() => { setUpdate(true) }}>
                         {update ?
-                            <div id="edit-note">
-                                <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
-                                <TextField multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
-                            </div> :
+                            <ClickAwayListener onClickAway={()=>{handleClickAway(props.id)}}>
+                                <div id="edit-note">
+                                    <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
+                                    <TextField multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
+                                </div>
+                             </ClickAwayListener> 
+                            :
                             <div>
                                 <h3 variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}>{title}</h3>
                                 <Typography multiline style={{ wordWrap: 'break-word' }} variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}><pre>{content}</pre></Typography>
