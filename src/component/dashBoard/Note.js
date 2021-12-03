@@ -32,11 +32,11 @@ export default function Note(props) {
     const [color, setColor] = useState(props.color);
     const [showColorPicker, setColorPicker] = useState(false)
     const [key, setKey] = useState(props.imageKey)
-    const [image, setImage] = useState(null)
+    const [url, setImage] = useState("https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/fundooImages/1638508639448_images.jpeg")
 
-    useEffect(async () => {
-        setImage(NoteHelper.getImage({ "key": key, "token": localStorage.getItem("token") }))
-    }, [key])
+    // useEffect(async () => {
+    //     setImage(NoteHelper.getImage({ "key": key, "token": localStorage.getItem("token") }))
+    // }, [key])
 
 
 
@@ -85,29 +85,30 @@ export default function Note(props) {
         changeFlag(!flag)
         setImagePopUp(false)
     }
-  
+
     const handleClickAway = (id) => {
-        console.log("click away called"); 
+        console.log("click away called");
         updateNote(id)
     };
 
     // if (!imagePopUp)
     return (
-        <>
+        <div style={{ 'background-color': color, 'border-radius': '5px', margin:'2px'}}>
             <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px', minHeight: '100px' }} key={props.id} loading='lazy'>
                 <CardContent class="card">
-                    {/* {image ===!null ? null : <div> */}
-                    {/* <Image src={image} /> */}
-                    {/* </div>} */}
+                    {key === null ? <div></div> : <div >
+                        {/* <Image src={require(`https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/${key}`)} alt="loading..." /> */}
+                        <Image src={`https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/${key}`} alt="loading..."  />
+                    </div>}
 
                     <div class="note" style={{ 'background-color': color, 'border-radius': '5px' }} onClick={() => { setUpdate(true) }}>
                         {update ?
-                            <ClickAwayListener onClickAway={()=>{handleClickAway(props.id)}}>
+                            <ClickAwayListener onClickAway={() => { handleClickAway(props.id) }}>
                                 <div id="edit-note">
                                     <TextField variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}></TextField>
                                     <TextField multiline variant="filled" value={content} onChange={(event) => { setContent(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center' } }}></TextField>
                                 </div>
-                             </ClickAwayListener> 
+                            </ClickAwayListener>
                             :
                             <div>
                                 <h3 variant="filled" value={title} onChange={(event) => { setTitle(event.target.value) }} inputProps={{ min: 0, style: { textAlign: 'center', fontWeight: 'bold' } }}>{title}</h3>
@@ -141,7 +142,7 @@ export default function Note(props) {
                     {imagePopUp ? <ImageUpload id={props.id} /> : console.log()}
                 </CardContent>
             </Card>
-        </>
+        </div>
     )
     // else
     //     return <ImageUpload></ImageUpload>
