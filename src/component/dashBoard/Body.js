@@ -5,7 +5,6 @@ import '../../css/Body.css'
 import AddNote from "../../component/dashBoard/AddNote"
 
 export default function Body(props) {
-
     return (
         <>
             <Card>

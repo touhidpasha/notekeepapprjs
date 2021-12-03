@@ -9,7 +9,6 @@ const notesReducers = (state = initialState, action) => {
             if (searchString == "")
             return { ...state, "data": [...action.payload].filter(note=>{ return (!note.trash)}) }
         else {
-            console.log("search is happening");
             return { ...state, "data": [...action.payload].filter(note => { return ((note.title.includes(searchString) || note.content.includes(searchString)) && !note.trash) }) }
 
         }
@@ -27,7 +26,6 @@ const trashNotesReducers = (state = initialState, action) => {
             if (searchString == "")
             return { ...state, "data": [...action.payload].filter(note=>{ return (note.trash)}) }
         else {
-            console.log("search is happening");
             return { ...state, "data": [...action.payload].filter(note => { return ((note.title.includes(searchString) || note.content.includes(searchString)) && note.trash) }) }
 
         }

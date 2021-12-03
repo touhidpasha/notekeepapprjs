@@ -5,14 +5,11 @@ import Typography from '@mui/material/Typography';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import ImageIcon from '@mui/icons-material/Image';
 import DeleteIcon from '@mui/icons-material/Delete';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import AddAlertIcon from '@mui/icons-material/AddAlert';
-import ArchiveIcon from '@mui/icons-material/Archive';
 import TextField from '@mui/material/TextField';
 import CreditScoreIcon from '@mui/icons-material/CreditScore';
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from 'redux'
-import { Circle, Wheel, Github } from '@uiw/react-color'
+import { Github } from '@uiw/react-color'
 import Image from "material-ui-image";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
@@ -23,7 +20,7 @@ import ImageUpload from "./ImageUpload";
 
 export default function Note(props) {
     const dispatch = useDispatch();
-    const { setNotes, setTrashNotes, getTrashNotes } = bindActionCreators(actionCreators, dispatch);
+    const { setNotes, setTrashNotes } = bindActionCreators(actionCreators, dispatch);
     const [flag, changeFlag] = useState()
 
     const [title, setTitle] = useState(props.title)
@@ -32,13 +29,6 @@ export default function Note(props) {
     const [color, setColor] = useState(props.color);
     const [showColorPicker, setColorPicker] = useState(false)
     const [key, setKey] = useState(props.imageKey)
-    const [url, setImage] = useState("https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/fundooImages/1638508639448_images.jpeg")
-
-    // useEffect(async () => {
-    //     setImage(NoteHelper.getImage({ "key": key, "token": localStorage.getItem("token") }))
-    // }, [key])
-
-
 
     const setColorHandler = (color) => {
         setColor(color)
@@ -56,7 +46,6 @@ export default function Note(props) {
     const [imagePopUp, setImagePopUp] = useState(false)
     const moveToTrash = (id) => {
         NoteHelper.moveToTrash({ "id": id, "token": localStorage.getItem("token") })
-        console.log(id + " is deleted");
         changeFlag(!flag)
     }
 
@@ -69,17 +58,7 @@ export default function Note(props) {
         setNotes(res.data, "")
         setTrashNotes(res.data, "")
         setUpdate(false)
-
-        console.log("notes after color" + JSON.stringify(res.data));
-        // setColorPicker(!showColorPicker)
-        // setImagePopUp(false)
     }, [flag])
-    // useEffect(async () => {
-    //     setImagePopUp(false)
-    // },[()=>{setTimeout(()=>{},4000)}])
-
-
-
     const updateNote = (id) => {
         NoteHelper.updateNote({ "id": id, "token": localStorage.getItem("token"), "title": title, "content": content })
         changeFlag(!flag)
@@ -87,18 +66,15 @@ export default function Note(props) {
     }
 
     const handleClickAway = (id) => {
-        console.log("click away called");
         updateNote(id)
     };
 
-    // if (!imagePopUp)
     return (
-        <div style={{ 'background-color': color, 'border-radius': '5px', margin:'2px'}}>
+        <div style={{ 'background-color': color, 'border-radius': '5px', margin: '2px' }}>
             <Card sx={{ display: 'grid', padding: '5px', margin: '10px', width: '540px', minHeight: '100px' }} key={props.id} loading='lazy'>
                 <CardContent class="card">
                     {key === null ? <div></div> : <div >
-                        {/* <Image src={require(`https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/${key}`)} alt="loading..." /> */}
-                        <Image src={`https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/${key}`} alt="loading..."  />
+                        <Image src={`https://bucket-for-serving-fundoo-only.s3.ap-south-1.amazonaws.com/${key}`} alt="loading..." />
                     </div>}
 
                     <div class="note" style={{ 'background-color': color, 'border-radius': '5px' }} onClick={() => { setUpdate(true) }}>
@@ -122,19 +98,13 @@ export default function Note(props) {
                             {
                                 (props.showTrash) ? <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
                                     : <>
-                                        {/* <AddAlertIcon></AddAlertIcon> */}
-
                                         <div onClick={() => { setColorPicker(!showColorPicker) }}>
                                             {(!showColorPicker) ? <ColorLensIcon >
                                             </ColorLensIcon> : <Github color={color} onChange={async (color) => { setColorHandler(color.hex); }} />}
-
-
                                         </div>
                                         <ImageIcon onClick={() => setImagePopUp(!imagePopUp)}></ImageIcon>
                                         <DeleteIcon onClick={() => (props.showTrash) ? deleteNote(props.id) : moveToTrash(props.id)}></DeleteIcon>
-                                        {/* <ArchiveIcon></ArchiveIcon> */}
                                         <CreditScoreIcon onClick={() => updateNote(props.id)}></CreditScoreIcon>
-                                        {/* <MoreVertIcon></MoreVertIcon> */}
                                     </>
                             }
                         </div>
@@ -144,6 +114,4 @@ export default function Note(props) {
             </Card>
         </div>
     )
-    // else
-    //     return <ImageUpload></ImageUpload>
 }
