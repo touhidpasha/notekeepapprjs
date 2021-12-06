@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Purpose          :note helper/controller for api call             
+ * 
+ * @file            : NoteHelper.js
+ * @author          : Touhid pasha
+ * @version         : 1.0
+ * @since           : 9-8-2021
+ * 
+ **************************************************************************/
 const axios = require('axios');
 const API = axios.create({
     baseURL: 'http://localhost:5000/',

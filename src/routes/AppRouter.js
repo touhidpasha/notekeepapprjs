@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Purpose          :router for navigation           
+ * 
+ * @file            : AppROuter.js
+ * @author          : Touhid pasha
+ * @version         : 1.0
+ * @since           : 9-8-2021
+ * 
+ **************************************************************************/
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import React, { useState } from "react";
 
