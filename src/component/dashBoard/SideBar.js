@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Purpose          : component          
+ * 
+ * @file            : SideBar..js
+ * @author          : Touhid pasha
+ * @version         : 1.0
+ * @since           : 9-8-2021
+ * 
+ **************************************************************************/
 import  React, {useState, useEffect} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';

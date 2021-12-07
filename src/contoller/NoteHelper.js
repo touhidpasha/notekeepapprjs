@@ -34,10 +34,9 @@ class NoteHelper {
 
     getAllNotes = async (info) => {
         const res = await API.post("note/getnotes", {
-            headers: {
-                'Authorization': info.token
-            }
-        })
+            'token': info.token
+        }
+        )
         return res;
     }
     uploadImage = async (data) => {

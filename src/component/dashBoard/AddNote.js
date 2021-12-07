@@ -1,3 +1,12 @@
+/* ************************************************************************
+ * Purpose          : adding new note              
+ * 
+ * @file            : AddNote.js
+ * @author          : Touhid pasha
+ * @version         : 1.0
+ * @since           : 9-8-2021
+ * 
+ **************************************************************************/
 import React ,{useState,useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
